@@ -1,4 +1,4 @@
-package org.mining.util;
+package org.mining.util.gitmetrics;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package org.mining.util.metrics;
+package org.mining.util.gitmetrics.metrics;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -11,7 +11,7 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
-import org.mining.util.GitMetricAnalyzer;
+import org.mining.util.gitmetrics.GitMetricAnalyzer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

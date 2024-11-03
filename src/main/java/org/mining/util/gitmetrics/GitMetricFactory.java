@@ -1,6 +1,6 @@
-package org.mining.util;
+package org.mining.util.gitmetrics;
 
-import org.mining.util.metrics.*;
+import org.mining.util.gitmetrics.metrics.*;
 
 public class GitMetricFactory {
     public static GitMetricAnalyzer getMetric(String metricName) {
@@ -10,7 +10,7 @@ public class GitMetricFactory {
             case "CommitFixRevert" -> new CommitFixRevert();
             case "CodeOwnershipByFile" -> new CodeOwnershipByFile();
             case "BranchTime" -> new BranchTime();
-            default -> throw new IllegalArgumentException("Unknown metric: " + metricName);
+            default -> null;
         };
     }
 }

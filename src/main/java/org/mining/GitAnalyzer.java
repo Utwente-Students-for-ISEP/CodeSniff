@@ -4,10 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
-import org.mining.util.GitMetricAnalyzer;
-import org.mining.util.GitMetricAnalyzerBuilder;
-import org.mining.util.GitMetricFactory;
-import org.mining.util.JsonObject;
+import org.mining.util.gitmetrics.GitMetricAnalyzer;
+import org.mining.util.gitmetrics.GitMetricAnalyzerBuilder;
+import org.mining.util.gitmetrics.GitMetricFactory;
+import org.mining.util.gitmetrics.JsonObject;
+import org.mining.util.inputparser.CodeAnalysisConfig;
+import org.mining.util.inputparser.ConfigParser;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,26 +20,25 @@ public class GitAnalyzer {
 
     private static String url;
     private static String dir_url;
-    private static List<String> metrics;
+    private static CodeAnalysisConfig codeAnalysisConfig;
 
     public static void main(String[] args) throws Exception {
-        //Read JSON File (in args file name is passed)
-        readConfigFile("metrics.json");
-        //Set up Repository and Connection
-        File dir = new File(dir_url);
-        Git git = getGit();
+        getConfig();
+        Git git = Git.open(new File(codeAnalysisConfig.getRepositoryPath()));
         Repository repository = git.getRepository();
         // Build metric analysis chain
         GitMetricAnalyzerBuilder builder = new GitMetricAnalyzerBuilder();
-        for (String metricName : metrics) {
+        for (String metricName : codeAnalysisConfig.getMetrics().keySet()) {
             GitMetricAnalyzer metric = GitMetricFactory.getMetric(metricName);
-            builder.addMetric(metric);
+            if (metric != null) {
+                builder.addMetric(metric);
+            }
         }
         // Analyze metrics
         builder.analyze(repository);
         //Cleanup
         git.getRepository().close();
-        deleteDirectory(dir);
+        //deleteDirectory(dir);
     }
 
     private static Git getGit() throws GitAPIException {
@@ -62,22 +63,12 @@ public class GitAnalyzer {
         }
     }
 
-    public static void readConfigFile(String file) {
-        if (file.isEmpty()) {
-            file = "metrics.json";
+    private static void getConfig() throws IOException {
+        InputStream input = GitAnalyzer.class.getClassLoader().getResourceAsStream("properties.json");
+        if (input == null) {
+            throw new IllegalArgumentException("File not found! properties.json");
         }
-        ClassLoader classLoader = GitAnalyzer.class.getClassLoader();
-        try (InputStream inputStream = classLoader.getResourceAsStream(file)) {
-            if (inputStream == null) {
-                throw new IllegalArgumentException("File not found! " + file);
-            } else {
-                JsonObject data = new ObjectMapper().readValue(inputStream, JsonObject.class);
-                url = data.getUrl();
-                dir_url = data.getDir();
-                metrics = data.getMetrics();
-            }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+
+        codeAnalysisConfig = ConfigParser.parseConfig(input);
     }
 }

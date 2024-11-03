@@ -1,0 +1,66 @@
+{
+  "repositoryPath": "/path/to/local/repository",
+  "metrics": {
+    "CyclomaticComplexity": {
+      "enabled": true
+    },
+    "CouplingBetweenObjects": {
+      "enabled": true
+    },
+    "LinesOfCode": {
+      "enabled": true
+    },
+    "MethodLength": {
+      "enabled": true,
+      "maxMethodLength": 50
+    },
+    "GodClassDetection": {
+      "enabled": true,
+      "classSizeThreshold": 1000
+    },
+    "NumberOfParametersPerMethod": {
+      "enabled": true,
+      "maxParameters": 5
+    },
+    "DepthOfInheritanceTree": {
+      "enabled": true,
+      "maxInheritanceDepth": 5
+    },
+    "CommitFrequency": {
+      "enabled": true
+    },
+    "Coupling": {
+      "enabled": true,
+      "maxCoupling": 5
+    },
+    "MostFrequentClassModified": {
+      "enabled": true
+    },
+    "GitChangeStatsPerAuthor": {
+      "enabled": true
+    },
+    "CommitSize": {
+      "enabled": true
+    },
+    "CommitFixRevert": {
+      "enabled": true
+    },
+    "CodeOwnershipByFile": {
+      "enabled": true
+    },
+    "BranchTime": {
+      "enabled": true
+    }
+  },
+  "languageSpecificSettings": {
+    "java": {
+      "enabled": true
+    },
+    "python": {
+      "enabled": true
+    },
+    "javascript": {
+      "enabled": true
+    }
+  }
+}

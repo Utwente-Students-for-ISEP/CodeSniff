@@ -1,11 +1,11 @@
-package org.mining.util.metrics;
+package org.mining.util.gitmetrics.metrics;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
-import org.mining.util.GitMetricAnalyzer;
+import org.mining.util.gitmetrics.GitMetricAnalyzer;
 
 import java.io.IOException;
 import java.time.Duration;

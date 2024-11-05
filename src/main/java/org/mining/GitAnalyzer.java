@@ -10,6 +10,7 @@ import org.mining.util.gitmetrics.GitMetricFactory;
 import org.mining.util.gitmetrics.JsonObject;
 import org.mining.util.inputparser.CodeAnalysisConfig;
 import org.mining.util.inputparser.ConfigParser;
+import org.mining.util.inputparser.MetricEnum;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class GitAnalyzer {
         Repository repository = git.getRepository();
         // Build metric analysis chain
         GitMetricAnalyzerBuilder builder = new GitMetricAnalyzerBuilder();
-        for (String metricName : codeAnalysisConfig.getMetrics().keySet()) {
+        for (MetricEnum metricName : codeAnalysisConfig.getMetrics().keySet()) {
             GitMetricAnalyzer metric = GitMetricFactory.getMetric(metricName);
             if (metric != null) {
                 builder.addMetric(metric);

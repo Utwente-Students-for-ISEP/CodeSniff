@@ -6,7 +6,8 @@ import lombok.Getter;
 @Getter
 public class CodeAnalysisConfig {
     private String repositoryPath;
-    private Map<String, MetricConfig> metrics;
+    //String is concrete metric -> enum
+    private Map<MetricEnum, MetricConfig> metrics;
     private LanguageSettings languageSpecificSettings;
 
     @Getter

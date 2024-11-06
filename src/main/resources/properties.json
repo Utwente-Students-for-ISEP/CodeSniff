@@ -8,7 +8,9 @@
       "enabled": true
     },
     "LinesOfCode": {
-      "enabled": true
+      "enabled": true,
+      "maxMethodLength": 50,
+      "classSizeThreshold": 1000
     },
     "MethodLength": {
       "enabled": true,
@@ -57,10 +59,10 @@
       "enabled": true
     },
     "python": {
-      "enabled": true
+      "enabled": false
     },
     "javascript": {
-      "enabled": true
+      "enabled": false
     }
   }
 }

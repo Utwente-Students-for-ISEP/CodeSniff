@@ -15,12 +15,26 @@ public class MetricAnalyzer {
         this.metricBuilderAnalyzer = new MetricBuilderAnalyzer();
         this.languageStrategyRunner = new LanguageStrategyRunner();
     }
+    /**
+     * Runs the metrics analysis process for the specified configuration.
+     *
+     * <p>This method performs the following steps:</p>
+     * <ul>
+     *     <li>Detects enabled languages based on the {@link CodeAnalysisConfig}.</li>
+     *     <li>Retrieves corresponding {@link LanguageProcessingComponents} for each enabled language from {@link LanguageFactory}.</li>
+     *     <li>Adds each language's {@code ILanguageMetricGenerator} to the {@code metricBuilderAnalyzer} to prepare for metrics generation.</li>
+     *     <li>Adds each language's {@code ILanguageParserStrategy} to the {@code languageStrategyRunner} for syntax parsing.</li>
+     *     <li>Triggers metrics generation by calling {@code metricBuilderAnalyzer.analyze()}.</li>
+     *     <li>Executes language parsing strategies through {@code languageStrategyRunner.execute()}.</li>
+     * </ul>
+     *
+     * <p>Supported languages include Java, Python, and JavaScript, each identified in the
+     * {@link CodeAnalysisConfig.LanguageSettings} object.</p>
+     *
+     * @param config The {@link CodeAnalysisConfig} containing language settings and other
+     *               configurations for metrics generation and analysis.
+     */
     public void runMetrics(CodeAnalysisConfig config){
-        //DetectLanguages (through LanguageFactory)
-        //Write them into MetricBuilder and call "analyze" - Generates config files for languages
-        //Set up strategies
-        //Start analyzers
-
         CodeAnalysisConfig.LanguageSettings languageSettings = config.getLanguageSpecificSettings();
 
         if (languageSettings.getJavaConfig() != null && languageSettings.getJavaConfig().isEnabled()) {

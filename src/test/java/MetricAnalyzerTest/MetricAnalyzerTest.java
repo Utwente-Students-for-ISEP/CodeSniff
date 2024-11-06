@@ -27,7 +27,7 @@ public class MetricAnalyzerTest {
             throw new IllegalArgumentException("Config file not found!");
         }
         codeAnalysisConfig = ConfigParser.parseConfig(configInputStream);
-        
+
         metricAnalyzer = new MetricAnalyzer();
     }
 

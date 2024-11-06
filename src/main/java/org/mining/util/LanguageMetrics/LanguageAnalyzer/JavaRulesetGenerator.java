@@ -27,6 +27,21 @@ public class JavaRulesetGenerator implements ILanguageMetricGenerator {
             ex.printStackTrace();
         }
     }
+    /**
+     * Generates a custom PMD ruleset XML based on the provided metric configuration.
+     * This method loops through the given metrics configuration and for each enabled metric,
+     * it appends the corresponding rule to the XML content.
+     *
+     * <p>The generated XML structure follows the PMD ruleset format, including namespaces
+     * and schema locations for validation. It also contains a description of the ruleset
+     * and the specific rules for each metric defined in the configuration.</p>
+     *
+     * <p>The XML is built dynamically by iterating through the provided {@code config} map
+     * that contains metrics and their respective configuration settings.</p>
+     *
+     * @param config A map where keys are metrics and values are their corresponding configuration settings.
+     * @throws IllegalArgumentException if any required metric is missing or improperly configured.
+     */
     @Override
     public void generateAnalyzer(Map<MetricEnum, CodeAnalysisConfig.MetricConfig> config) {
         //loop through Metrics

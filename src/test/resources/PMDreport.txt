@@ -1,14 +1,14 @@
-D:\GitHub Repos\set2024team06project\src\main\java\components\board\Hexagon.java:51:	CyclomaticComplexity:	The method 'setNeighbor(int, Hexagon)' has a cyclomatic complexity of 10.
-D:\GitHub Repos\set2024team06project\src\main\java\components\board\Map.java:182:	CognitiveComplexity:	The method 'findHexInElements(Hexagon)' has a cognitive complexity of 28, current threshold is 15
-D:\GitHub Repos\set2024team06project\src\main\java\components\board\Map.java:182:	CyclomaticComplexity:	The method 'findHexInElements(Hexagon)' has a cyclomatic complexity of 11.
 D:\GitHub Repos\set2024team06project\src\main\java\components\board\presets\MapSetUp.java:18:	ExcessiveParameterList:	Avoid long parameter lists.
-D:\GitHub Repos\set2024team06project\src\main\java\components\board\HexagonalGrid.java:51:	CognitiveComplexity:	The method 'setNeighbours()' has a cognitive complexity of 49, current threshold is 15
-D:\GitHub Repos\set2024team06project\src\main\java\components\board\HexagonalGrid.java:51:	CyclomaticComplexity:	The method 'setNeighbours()' has a cyclomatic complexity of 19.
-D:\GitHub Repos\set2024team06project\src\main\java\components\cards\SpecialCard.java:14:	ExcessiveParameterList:	Avoid long parameter lists.
+D:\GitHub Repos\set2024team06project\src\main\java\components\board\Hexagon.java:51:	CyclomaticComplexity:	The method 'setNeighbor(int, Hexagon)' has a cyclomatic complexity of 10.
 D:\GitHub Repos\set2024team06project\src\main\java\components\board\TerrainStrip.java:23:	ExcessiveParameterList:	Avoid long parameter lists.
 D:\GitHub Repos\set2024team06project\src\main\java\components\board\TerrainStrip.java:111:	ExcessiveParameterList:	Avoid long parameter lists.
 D:\GitHub Repos\set2024team06project\src\main\java\components\board\TerrainStrip.java:120:	ExcessiveParameterList:	Avoid long parameter lists.
 D:\GitHub Repos\set2024team06project\src\main\java\components\board\TerrainStrip.java:132:	ExcessiveParameterList:	Avoid long parameter lists.
+D:\GitHub Repos\set2024team06project\src\main\java\components\board\Map.java:182:	CognitiveComplexity:	The method 'findHexInElements(Hexagon)' has a cognitive complexity of 28, current threshold is 15
+D:\GitHub Repos\set2024team06project\src\main\java\components\board\Map.java:182:	CyclomaticComplexity:	The method 'findHexInElements(Hexagon)' has a cyclomatic complexity of 11.
+D:\GitHub Repos\set2024team06project\src\main\java\components\board\HexagonalGrid.java:51:	CognitiveComplexity:	The method 'setNeighbours()' has a cognitive complexity of 49, current threshold is 15
+D:\GitHub Repos\set2024team06project\src\main\java\components\board\HexagonalGrid.java:51:	CyclomaticComplexity:	The method 'setNeighbours()' has a cyclomatic complexity of 19.
+D:\GitHub Repos\set2024team06project\src\main\java\components\cards\SpecialCard.java:14:	ExcessiveParameterList:	Avoid long parameter lists.
+D:\GitHub Repos\set2024team06project\src\main\java\components\gameManager\ActionHandlers\MovementHandler.java:90:	CognitiveComplexity:	The method 'tryMovePlayer(Player, Hexagon)' has a cognitive complexity of 21, current threshold is 15
 D:\GitHub Repos\set2024team06project\src\main\java\ui\builders\Builder.java:16:	ExcessiveParameterList:	Avoid long parameter lists.
 D:\GitHub Repos\set2024team06project\src\main\java\ui\builders\Builder.java:37:	ExcessiveParameterList:	Avoid long parameter lists.
-D:\GitHub Repos\set2024team06project\src\main\java\components\gameManager\ActionHandlers\MovementHandler.java:90:	CognitiveComplexity:	The method 'tryMovePlayer(Player, Hexagon)' has a cognitive complexity of 21, current threshold is 15

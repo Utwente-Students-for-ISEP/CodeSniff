@@ -22,13 +22,12 @@ public class MetricAnalyzerTest {
 
     @BeforeEach
     public void setUp() throws IOException {
-        InputStream configInputStream = getClass().getClassLoader().getResourceAsStream("properties.json");
+        InputStream configInputStream = getClass().getClassLoader().getResourceAsStream("pmdTestProperties.json");
         if (configInputStream == null) {
             throw new IllegalArgumentException("Config file not found!");
         }
         codeAnalysisConfig = ConfigParser.parseConfig(configInputStream);
-
-        // Создаем экземпляр MetricAnalyzer
+        
         metricAnalyzer = new MetricAnalyzer();
     }
 
@@ -49,14 +48,20 @@ public class MetricAnalyzerTest {
 
         assertEquals(expectedContent, generatedContent, "Generated ruleset does not match expected.");
     }
-    // Метод для нормализации строк
+
+    @Test
+    void testPMDReportGeneration() throws IOException {
+
+        metricAnalyzer.runMetrics(codeAnalysisConfig);
+        File generatedFile = new File("src/test/resources/PMDreport.txt");
+        assertTrue(generatedFile.exists(), "Generated ruleset file does not exist");
+    }
     private String normalizeContent(String content) {
         // Убираем все символы новой строки, пробелы и табуляции
         content = content.replaceAll("\\s+", "");
         return content;
     }
 
-    // Метод для загрузки конфигурации
     private static CodeAnalysisConfig loadConfig() throws IOException {
         InputStream input = MetricAnalyzerTest.class.getClassLoader().getResourceAsStream("properties.json");
         if (input == null) {

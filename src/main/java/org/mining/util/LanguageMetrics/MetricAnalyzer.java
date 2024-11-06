@@ -1,46 +1,53 @@
 package org.mining.util.LanguageMetrics;
 
 import org.mining.util.LanguageMetrics.LanguageAnalyzer.ILanguageMetricGenerator;
+import org.mining.util.LanguageMetrics.LanguageFactory.LanguageFactory;
+import org.mining.util.LanguageMetrics.LanguageFactory.LanguageProcessingComponents;
+import org.mining.util.LanguageMetrics.LanguageParsingStartegies.LanguageStrategyRunner;
 import org.mining.util.inputparser.CodeAnalysisConfig;
 import org.mining.util.inputparser.SupportedLanguages;
 
-import java.util.List;
-
 public class MetricAnalyzer {
     private final MetricBuilderAnalyzer metricBuilderAnalyzer;
+    private final LanguageStrategyRunner languageStrategyRunner;
 
     public MetricAnalyzer() {
         this.metricBuilderAnalyzer = new MetricBuilderAnalyzer();
+        this.languageStrategyRunner = new LanguageStrategyRunner();
     }
     public void runMetrics(CodeAnalysisConfig config){
         //DetectLanguages (through LanguageFactory)
         //Write them into MetricBuilder and call "analyze" - Generates config files for languages
+        //Set up strategies
         //Start analyzers
 
         CodeAnalysisConfig.LanguageSettings languageSettings = config.getLanguageSpecificSettings();
 
-        // Проверяем и добавляем генератор для каждого поддерживаемого языка, если он включен
         if (languageSettings.getJavaConfig() != null && languageSettings.getJavaConfig().isEnabled()) {
-            ILanguageMetricGenerator javaGenerator = LanguageFactory.getMetricGenerator(SupportedLanguages.Java);
-            if (javaGenerator != null) {
-                metricBuilderAnalyzer.addLanguageMetricGenerator(javaGenerator);
+            LanguageProcessingComponents processingComponents = LanguageFactory.getMetricGenerator(SupportedLanguages.Java);
+            if (processingComponents != null) {
+                metricBuilderAnalyzer.addLanguageMetricGenerator(processingComponents.metricGenerator());
+                languageStrategyRunner.addParsingStrategy(processingComponents.parserStrategy());
+
             }
         }
         if (languageSettings.getPythonConfig() != null && languageSettings.getPythonConfig().isEnabled()) {
-            ILanguageMetricGenerator pythonGenerator = LanguageFactory.getMetricGenerator(SupportedLanguages.Python);
-            if (pythonGenerator != null) {
-                metricBuilderAnalyzer.addLanguageMetricGenerator(pythonGenerator);
+            LanguageProcessingComponents processingComponents = LanguageFactory.getMetricGenerator(SupportedLanguages.Python);
+            if (processingComponents != null) {
+                metricBuilderAnalyzer.addLanguageMetricGenerator(processingComponents.metricGenerator());
+                languageStrategyRunner.addParsingStrategy(processingComponents.parserStrategy());
             }
         }
         if (languageSettings.getJavascriptConfig() != null && languageSettings.getJavascriptConfig().isEnabled()) {
-            ILanguageMetricGenerator jsGenerator = LanguageFactory.getMetricGenerator(SupportedLanguages.JavaScript);
-            if (jsGenerator != null) {
-                metricBuilderAnalyzer.addLanguageMetricGenerator(jsGenerator);
+            LanguageProcessingComponents processingComponents = LanguageFactory.getMetricGenerator(SupportedLanguages.JavaScript);
+            if (processingComponents != null) {
+                metricBuilderAnalyzer.addLanguageMetricGenerator(processingComponents.metricGenerator());
+                languageStrategyRunner.addParsingStrategy(processingComponents.parserStrategy());
             }
         }
 
-        // Запускаем анализ метрик для всех добавленных генераторов
         metricBuilderAnalyzer.analyze(config);
+        languageStrategyRunner.execute(config.getRepositoryPath());
 
     }
 }

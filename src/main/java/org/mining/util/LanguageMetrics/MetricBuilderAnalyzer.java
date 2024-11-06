@@ -5,6 +5,9 @@ import org.mining.util.inputparser.CodeAnalysisConfig;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class MetricBuilderAnalyzer {
     private final List<ILanguageMetricGenerator> languageMetricGenerators = new ArrayList<>();
@@ -14,18 +17,34 @@ public class MetricBuilderAnalyzer {
     }
     /**
      * Analyzes the code by iterating through each registered language metric generator.
+     * Executes the metric generation process in parallel.
      *
-     * <p>This method executes the metric generation process for each language metric generator
-     * that has been added to the {@code languageMetricGenerators} list. For each generator,
-     * it calls {@code generateAnalyzer()} with the metrics configuration from the given
-     * {@link CodeAnalysisConfig}.</p>
+     * <p>This method uses an ExecutorService to execute each metric generation task in parallel.
+     * Each language metric generator will run in its own thread concurrently, improving performance
+     * when there are multiple language generators to process.</p>
      *
      * @param config The {@link CodeAnalysisConfig} containing the metrics settings to be used by each generator.
      *               This includes specific metrics configurations for each enabled metric.
      */
     public void analyze(CodeAnalysisConfig config){
-        for(ILanguageMetricGenerator generator: languageMetricGenerators){
-            generator.generateAnalyzer(config.getMetrics());
+        ExecutorService executorService = Executors.newFixedThreadPool(languageMetricGenerators.size());
+
+        // Submit each metric generation task for parallel execution
+        for (ILanguageMetricGenerator generator : languageMetricGenerators) {
+            executorService.submit(() -> generator.generateAnalyzer(config.getMetrics()));
+        }
+
+        //shut down the executor after all tasks are complete
+        executorService.shutdown();
+
+        try {
+            // Wait for all tasks to finish
+            if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) {
+                executorService.shutdownNow(); // Force shutdown if tasks don't complete in time
+            }
+        } catch (InterruptedException e) {
+            executorService.shutdownNow(); // Interrupt if shutdown is interrupted
+            Thread.currentThread().interrupt();
         }
     }
 }

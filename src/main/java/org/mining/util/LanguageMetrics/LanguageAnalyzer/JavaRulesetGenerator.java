@@ -44,9 +44,6 @@ public class JavaRulesetGenerator implements ILanguageMetricGenerator {
      */
     @Override
     public void generateAnalyzer(Map<MetricEnum, CodeAnalysisConfig.MetricConfig> config) {
-        //loop through Metrics
-        //Detect enabled
-        //Config by MetricConfig
         StringBuilder xmlBuilder = new StringBuilder();
         xmlBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         xmlBuilder.append("<ruleset name=\"Custom Rules\"\n");
@@ -69,12 +66,9 @@ public class JavaRulesetGenerator implements ILanguageMetricGenerator {
             MetricEnum metricType = entry.getKey();
             CodeAnalysisConfig.MetricConfig metricConfig = entry.getValue();
 
-            // Проверяем, включена ли метрика
             if (metricConfig.isEnabled()) {
-                // Получаем соответствующий AbstractJavaMetric
                 AbstractJavaMetric metric = JavaMetricFactory.getMetric(metricType);
                 if (metric != null) {
-                    // Генерируем XML для конкретной метрики
                     metric.generateMetric(metricConfig, xmlBuilder);
                 }
             }

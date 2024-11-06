@@ -2,6 +2,9 @@ package org.mining.util.LanguageMetrics.LanguageParsingStartegies;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class LanguageStrategyRunner {
     private final List<ILanguageParserStrategy> parsingStrategies = new ArrayList<>();
@@ -11,19 +14,36 @@ public class LanguageStrategyRunner {
     }
 
     /**
-     * Executes all registered language parsing strategies for the specified source directory.
+     * Executes all registered language parsing strategies for the specified source directory
+     * in parallel.
      *
-     * <p>This method iterates over each parsing strategy in {@code parsingStrategies} and
-     * invokes {@link #execute(ILanguageParserStrategy, String)} on each, providing the
-     * directory where source code is located. Each strategy will handle parsing in its
-     * own language-specific way.</p>
+     * <p>This method uses an ExecutorService to execute each parsing strategy in its own thread
+     * concurrently. The directory where source code is located is provided to each strategy for
+     * processing.</p>
      *
      * @param sourceDir The directory path containing the source code files to be analyzed
      *                  by each parsing strategy.
      */
     public void execute(String sourceDir){
-        for(ILanguageParserStrategy strategy: parsingStrategies){
-            execute(strategy, sourceDir);
+        // Create a thread pool with as many threads as there are parsing strategies
+        ExecutorService executorService = Executors.newFixedThreadPool(parsingStrategies.size());
+
+        // Submit each strategy for execution in parallel
+        for (ILanguageParserStrategy strategy : parsingStrategies) {
+            executorService.submit(() -> execute(strategy, sourceDir));
+        }
+
+        //shut down the executor after all tasks are complete
+        executorService.shutdown();
+
+        try {
+            // Wait for all tasks to finish
+            if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) {
+                executorService.shutdownNow(); // Force shutdown if tasks don't complete in time
+            }
+        } catch (InterruptedException e) {
+            executorService.shutdownNow(); // Interrupt if shutdown is interrupted
+            Thread.currentThread().interrupt();
         }
     }
     /**

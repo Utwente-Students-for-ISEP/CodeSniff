@@ -32,13 +32,18 @@
     "CodeOwnershipByFile": {},
     "BranchTime": {}
   },
-  "languageSpecificSettings": {
-    "java": {},
-    "python": {
+  "languageSpecificSettings": [
+    {
+      "language": "Java",
+      "enabled": true
+    },
+    {
+      "language": "Python",
       "enabled": false
     },
-    "javascript": {
+    {
+      "language": "Javascript",
       "enabled": false
     }
-  }
+  ]
 }

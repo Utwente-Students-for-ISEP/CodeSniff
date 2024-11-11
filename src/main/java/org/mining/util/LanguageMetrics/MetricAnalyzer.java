@@ -7,6 +7,8 @@ import org.mining.util.LanguageMetrics.LanguageParsingStartegies.LanguageStrateg
 import org.mining.util.inputparser.CodeAnalysisConfig;
 import org.mining.util.inputparser.SupportedLanguages;
 
+import java.util.List;
+
 public class MetricAnalyzer {
     private final MetricBuilderAnalyzer metricBuilderAnalyzer;
     private final LanguageStrategyRunner languageStrategyRunner;
@@ -29,37 +31,24 @@ public class MetricAnalyzer {
      * </ul>
      *
      * <p>Supported languages include Java, Python, and JavaScript, each identified in the
-     * {@link CodeAnalysisConfig.LanguageSettings} object.</p>
+     * {@link SupportedLanguages} object.</p>
      *
      * @param config The {@link CodeAnalysisConfig} containing language settings and other
      *               configurations for metrics generation and analysis.
      */
     public void runMetrics(CodeAnalysisConfig config){
-        CodeAnalysisConfig.LanguageSettings languageSettings = config.getLanguageSpecificSettings();
+        List<CodeAnalysisConfig.LanguageConfig> languageSettings = config.getLanguageSpecificSettings();
 
-        if (languageSettings.getJavaConfig() != null && languageSettings.getJavaConfig().isEnabled()) {
-            LanguageProcessingComponents processingComponents = LanguageFactory.getMetricGenerator(SupportedLanguages.Java);
-            if (processingComponents != null) {
-                metricBuilderAnalyzer.addLanguageMetricGenerator(processingComponents.metricGenerator());
-                languageStrategyRunner.addParsingStrategy(processingComponents.parserStrategy());
+        for (var lang : languageSettings){
+            if (lang.isEnabled()){
+                LanguageProcessingComponents processingComponents = LanguageFactory.getMetricGenerator(lang.getLanguage());
+                if (processingComponents != null) {
+                    metricBuilderAnalyzer.addLanguageMetricGenerator(processingComponents.metricGenerator());
+                    languageStrategyRunner.addParsingStrategy(processingComponents.parserStrategy());
 
+                }
             }
         }
-        if (languageSettings.getPythonConfig() != null && languageSettings.getPythonConfig().isEnabled()) {
-            LanguageProcessingComponents processingComponents = LanguageFactory.getMetricGenerator(SupportedLanguages.Python);
-            if (processingComponents != null) {
-                metricBuilderAnalyzer.addLanguageMetricGenerator(processingComponents.metricGenerator());
-                languageStrategyRunner.addParsingStrategy(processingComponents.parserStrategy());
-            }
-        }
-        if (languageSettings.getJavascriptConfig() != null && languageSettings.getJavascriptConfig().isEnabled()) {
-            LanguageProcessingComponents processingComponents = LanguageFactory.getMetricGenerator(SupportedLanguages.JavaScript);
-            if (processingComponents != null) {
-                metricBuilderAnalyzer.addLanguageMetricGenerator(processingComponents.metricGenerator());
-                languageStrategyRunner.addParsingStrategy(processingComponents.parserStrategy());
-            }
-        }
-
         metricBuilderAnalyzer.analyze(config);
         languageStrategyRunner.execute(config.getRepositoryPath());
 

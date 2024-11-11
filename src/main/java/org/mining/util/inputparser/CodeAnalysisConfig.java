@@ -1,6 +1,7 @@
 package org.mining.util.inputparser;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.Getter;
 
 @Getter
@@ -13,12 +14,17 @@ public class CodeAnalysisConfig {
 
     @Getter
     public static class MetricConfig {
-        private boolean enabled;
+        private boolean enabled = true;
         private Integer maxMethodLength;
         private Integer classSizeThreshold;
         private Integer maxParameters;
         private Integer maxInheritanceDepth;
         private Integer maxCoupling;
+
+        @JsonSetter("enabled")
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
     }
 
     @Getter
@@ -33,6 +39,12 @@ public class CodeAnalysisConfig {
 
     @Getter
     public static class LanguageConfig {
-        private boolean enabled;
+        // Each language config is enabled by default
+        private boolean enabled = true;
+
+        @JsonSetter("enabled")
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
     }
 }

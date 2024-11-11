@@ -1,5 +1,0 @@
-{
-  "url" : "https://github.com/LastAdequateCoder/SoftwareEvolution.git",
-  "dir" : "tempDir",
-  "metrics" : ["CommitFrequency", "CommitSize", "CommitFixRevert", "CodeOwnershipByFile", "BranchTime"]
-}

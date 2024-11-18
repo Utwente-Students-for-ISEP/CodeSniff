@@ -8,6 +8,7 @@ import org.mining.util.inputparser.CodeAnalysisConfig;
 import org.mining.util.inputparser.SupportedLanguages;
 
 import java.util.List;
+import java.util.Map;
 
 public class MetricAnalyzer {
     private final MetricBuilderAnalyzer metricBuilderAnalyzer;
@@ -37,11 +38,12 @@ public class MetricAnalyzer {
      *               configurations for metrics generation and analysis.
      */
     public void runMetrics(CodeAnalysisConfig config){
-        List<CodeAnalysisConfig.LanguageConfig> languageSettings = config.getLanguageSpecificSettings();
+        Map<SupportedLanguages, CodeAnalysisConfig.LanguageConfig> languageSettings = config.getLanguageSpecificSettings();
 
-        for (var lang : languageSettings){
-            if (lang.isEnabled()){
-                LanguageProcessingComponents processingComponents = LanguageFactory.getMetricGenerator(lang.getLanguage());
+        for (var lang : languageSettings.keySet()){
+            if (languageSettings.get(lang).isEnabled()){
+                LanguageProcessingComponents processingComponents = LanguageFactory
+                        .getMetricGenerator(lang);
                 if (processingComponents != null) {
                     metricBuilderAnalyzer.addLanguageMetricGenerator(processingComponents.metricGenerator());
                     languageStrategyRunner.addParsingStrategy(processingComponents.parserStrategy());

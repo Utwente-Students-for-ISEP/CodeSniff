@@ -16,8 +16,7 @@ public class CodeAnalysisConfig {
     private Map<MetricEnum, MetricConfig> metrics;
 
     @JsonProperty("languageSpecificSettings")
-    @JsonDeserialize(using = LanguageSettingsDeserializer.class)
-    private List<LanguageConfig> languageSpecificSettings;
+    private Map<SupportedLanguages, LanguageConfig> languageSpecificSettings;
 
     @Getter
     public static class MetricConfig {
@@ -27,6 +26,8 @@ public class CodeAnalysisConfig {
         private Integer maxParameters;
         private Integer maxInheritanceDepth;
         private Integer maxCoupling;
+        private Integer maxCyclomaticComplexity;
+        private Integer maxDependencies;
 
         @JsonSetter("enabled")
         public void setEnabled(boolean enabled) {
@@ -36,9 +37,6 @@ public class CodeAnalysisConfig {
 
     @Getter
     public static class LanguageConfig {
-        @Setter
-        private SupportedLanguages language;
-
         private boolean enabled = true;
 
         @JsonSetter("enabled")

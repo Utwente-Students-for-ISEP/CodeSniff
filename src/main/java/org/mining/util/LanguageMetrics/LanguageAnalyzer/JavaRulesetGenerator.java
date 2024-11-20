@@ -1,13 +1,11 @@
 package org.mining.util.LanguageMetrics.LanguageAnalyzer;
 
 import org.mining.util.LanguageMetrics.LanguageAnalyzer.LanguageMetricGenerator.JavaMetrics.AbstractJavaMetric;
-import org.mining.util.LanguageMetrics.MetricAnalyzer;
 import org.mining.util.LanguageMetrics.MetricFactories.JavaMetricFactory;
 import org.mining.util.inputparser.CodeAnalysisConfig;
 import org.mining.util.inputparser.MetricEnum;
 
 import java.io.*;
-import java.nio.file.Path;
 import java.util.Map;
 import java.util.Properties;
 

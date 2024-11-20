@@ -1,5 +1,7 @@
 package org.mining.util.gitmetrics.metrics;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
@@ -12,7 +14,7 @@ import java.time.ZoneId;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class CommitFrequency implements GitMetricAnalyzer {
+public class CommitFrequency implements GitMetricAnalyzer<Map<LocalDate, Integer>> {
 
     private final Map<LocalDate, Integer> commitFrequency = new TreeMap<>();
 
@@ -40,5 +42,10 @@ public class CommitFrequency implements GitMetricAnalyzer {
         }
         res.append("---------------------------------------------\n");
         return res.toString();
+    }
+
+    @Override
+    public Map<LocalDate, Integer> returnResult() {
+        return commitFrequency;
     }
 }

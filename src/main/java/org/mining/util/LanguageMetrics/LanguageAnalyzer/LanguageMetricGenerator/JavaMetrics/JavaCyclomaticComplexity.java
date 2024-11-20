@@ -1,9 +1,6 @@
 package org.mining.util.LanguageMetrics.LanguageAnalyzer.LanguageMetricGenerator.JavaMetrics;
 
-import org.mining.util.LanguageMetrics.LanguageAnalyzer.LanguageMetricGenerator.IMetric;
 import org.mining.util.inputparser.CodeAnalysisConfig;
-
-import java.nio.file.Path;
 
 public class JavaCyclomaticComplexity extends AbstractJavaMetric {
 

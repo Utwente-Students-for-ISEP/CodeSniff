@@ -9,7 +9,7 @@ import org.mining.util.gitmetrics.GitMetricAnalyzer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommitFixRevert implements GitMetricAnalyzer {
+public class CommitFixRevert implements GitMetricAnalyzer<List<RevCommit>> {
 
     private final List<RevCommit> matchingCommits = new ArrayList<>();
     private final String[] keywords = {"revert", "fix"};
@@ -44,6 +44,11 @@ public class CommitFixRevert implements GitMetricAnalyzer {
             res.append("---------------------------------------------\n");
         }
         return res.toString();
+    }
+
+    @Override
+    public List<RevCommit> returnResult() {
+        return matchingCommits;
     }
 }
 

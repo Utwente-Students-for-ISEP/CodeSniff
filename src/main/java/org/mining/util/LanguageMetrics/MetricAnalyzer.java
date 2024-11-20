@@ -10,11 +10,11 @@ import org.mining.util.inputparser.SupportedLanguages;
 import java.util.List;
 
 public class MetricAnalyzer {
-    private final MetricBuilderAnalyzer metricBuilderAnalyzer;
+    private final MetricAnalyzerBuilder metricBuilderAnalyzer;
     private final LanguageStrategyRunner languageStrategyRunner;
 
     public MetricAnalyzer() {
-        this.metricBuilderAnalyzer = new MetricBuilderAnalyzer();
+        this.metricBuilderAnalyzer = new MetricAnalyzerBuilder();
         this.languageStrategyRunner = new LanguageStrategyRunner();
     }
     /**

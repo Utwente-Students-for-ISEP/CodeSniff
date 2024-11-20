@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CodeOwnershipByFile implements GitMetricAnalyzer {
+public class CodeOwnershipByFile implements GitMetricAnalyzer<Map<String, Map<String, Integer>>> {
 
     private final Map<String, Map<String, Integer>> fileOwnership = new HashMap<>();
 
@@ -31,6 +31,11 @@ public class CodeOwnershipByFile implements GitMetricAnalyzer {
         } catch (GitAPIException | IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Map<String, Map<String, Integer>> returnResult() {
+        return fileOwnership;
     }
 
     private void analyzeCommitDiff(Repository repository, RevCommit commit, String author) throws IOException {

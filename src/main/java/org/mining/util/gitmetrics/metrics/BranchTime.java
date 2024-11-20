@@ -1,25 +1,44 @@
 package org.mining.util.gitmetrics.metrics;
 
-import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.revwalk.RevWalk;
 import org.mining.util.gitmetrics.GitMetricAnalyzer;
+import org.eclipse.jgit.api.ListBranchCommand;
+
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import java.time.Duration;
+
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.lib.ObjectId;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.revwalk.RevWalk;
 
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BranchTime implements GitMetricAnalyzer {
+public class BranchTime implements GitMetricAnalyzer<List<Long>> {
 
     private final List<Long> branchLifetimes = new ArrayList<>();
 
     @Override
     public void analyze(Repository repository) {
         try (Git git = new Git(repository)) {
-            List<Ref> branches = git.branchList().call();
+            List<Ref> branches = git.branchList().setListMode(org.eclipse.jgit.api.ListBranchCommand.ListMode.ALL).call();
             for (Ref branch : branches) {
                 if (branch.getName().endsWith("main") || branch.getName().endsWith("master")) {
                     continue;
@@ -34,39 +53,58 @@ public class BranchTime implements GitMetricAnalyzer {
         }
     }
 
+    @Override
+    public List<Long> returnResult() {
+        return branchLifetimes;
+    }
+
     private long calculateBranchLifetime(Repository repository, Ref branch) throws IOException, GitAPIException {
-        RevCommit branchCreationCommit = getFirstCommit(repository, branch);
+        RevCommit branchCreationCommit = getFirstUniqueCommit(repository, branch);
         if (branchCreationCommit == null) {
             return -1;
         }
 
-        RevCommit mergeCommit = getMergeCommit(repository, branch.getName());
+        RevCommit mergeCommit = getMergeCommit(repository, branch);
         if (mergeCommit == null) {
             return -1;
         }
-
         long branchCreationTime = branchCreationCommit.getCommitTime();
         long branchMergeTime = mergeCommit.getCommitTime();
         return branchMergeTime - branchCreationTime;
     }
 
-    private RevCommit getFirstCommit(Repository repository, Ref branch) throws IOException, GitAPIException {
-        try (Git git = new Git(repository)) {
-            Iterable<RevCommit> commits = git.log().add(branch.getObjectId()).call();
-            RevCommit firstCommit = null;
-            for (RevCommit commit : commits) {
-                firstCommit = commit;
+    private RevCommit getFirstUniqueCommit(Repository repository, Ref branch) throws IOException, GitAPIException {
+        try (Git git = new Git(repository);
+             RevWalk revWalk = new RevWalk(repository)) {
+            ObjectId branchId = repository.resolve(branch.getName());
+            if (branchId == null) {
+                return null;
             }
-            return firstCommit;
+            Iterable<RevCommit> commits = git.log().add(branchId).call();
+            for (RevCommit commit : commits) {
+                return commit;
+            }
         }
+        return null;
     }
 
-    private RevCommit getMergeCommit(Repository repository, String branchName) throws IOException, GitAPIException {
-        try (Git git = new Git(repository)) {
-            Iterable<RevCommit> commits = git.log().add(repository.resolve(branchName)).call();
-            for (RevCommit commit : commits) {
+    private RevCommit getMergeCommit(Repository repository, Ref branch) throws IOException, GitAPIException {
+        try (Git git = new Git(repository);
+             RevWalk revWalk = new RevWalk(repository)) {
+            ObjectId mainBranchId = repository.resolve("refs/heads/main");
+            if (mainBranchId == null) {
+                mainBranchId = repository.resolve("refs/heads/master");
+            }
+            if (mainBranchId == null) {
+                return null;
+            }
+            Iterable<RevCommit> mainCommits = git.log().add(mainBranchId).call();
+            for (RevCommit commit : mainCommits) {
                 if (commit.getParentCount() > 1) {
-                    return commit;
+                    String message = commit.getFullMessage();
+                    if (message.contains(branch.getName()) || message.contains(branch.getName().substring(branch.getName().lastIndexOf("/") + 1))) {
+                        return commit;
+                    }
                 }
             }
         }
@@ -78,16 +116,12 @@ public class BranchTime implements GitMetricAnalyzer {
         if (branchLifetimes.isEmpty()) {
             return "No merged branches to calculate average branch time.";
         }
-
         long totalLifetime = branchLifetimes.stream().mapToLong(Long::longValue).sum();
         long averageLifetime = totalLifetime / branchLifetimes.size();
-
         Duration duration = Duration.ofSeconds(averageLifetime);
         long days = duration.toDays();
         long hours = duration.toHours() % 24;
         long minutes = duration.toMinutes() % 60;
-
         return String.format("Average Branch Lifetime: %d days, %d hours, %d minutes", days, hours, minutes);
     }
 }
-

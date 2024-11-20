@@ -15,6 +15,7 @@ public enum MetricEnum {
     CommitSize,
     CommitFixRevert,
     CodeOwnershipByFile,
-    BranchTime
+    BranchTime,
+    CodeChurn
 
 }

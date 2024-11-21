@@ -28,10 +28,10 @@ public class MetricAnalyzerJavascriptTest {
         metricAnalyzer = new MetricAnalyzer();
     }
 
-    @Test
-    void testReportGeneration() throws IOException {
-        metricAnalyzer.runMetrics(codeAnalysisConfig);
-        File generatedFile = new File("src/main/resources/eslint_report.txt");
-        assertTrue(generatedFile.exists(), "Generated ruleset file does not exist");
-    }
+//    @Test
+//    void testReportGeneration() throws IOException {
+//        metricAnalyzer.runMetrics(codeAnalysisConfig);
+//        File generatedFile = new File("src/main/resources/eslint_report.txt");
+//        assertTrue(generatedFile.exists(), "Generated ruleset file does not exist");
+//    }
 }

@@ -32,6 +32,7 @@ public class JavascriptRulesetGenerator implements ILanguageMetricGenerator{
     public void generateAnalyzer(Map<MetricEnum, CodeAnalysisConfig.MetricConfig> config) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("const importPlugin = require('eslint-plugin-import');\n");
+        stringBuilder.append("const depthOfInheritanceTreeRule = require('./depth-of-inheritance-tree');\n");
         stringBuilder.append("const sonarjsPlugin = require('eslint-plugin-sonarjs');\n\n");
         stringBuilder.append("module.exports = [\n");
         stringBuilder.append("  {\n");
@@ -39,6 +40,7 @@ public class JavascriptRulesetGenerator implements ILanguageMetricGenerator{
         stringBuilder.append("    plugins: {\n");
         stringBuilder.append("      import: importPlugin,\n");
         stringBuilder.append("      sonarjs: sonarjsPlugin,\n");
+        stringBuilder.append("      'custom-rules': { rules: { 'depth-of-inheritance-tree': depthOfInheritanceTreeRule } },\n");
         stringBuilder.append("    },\n");
         stringBuilder.append("    rules: {\n");
         stringBuilder.append("      'no-unused-vars': 'warn',\n");

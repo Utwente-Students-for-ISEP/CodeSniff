@@ -17,7 +17,7 @@ public class JavascriptMetricFactory {
         //metricsMap.put(MetricEnum.GodClassDetection, new JavascriptGodClass());
         metricsMap.put(MetricEnum.LinesOfCode, new JavascriptLinesOfCode());
         metricsMap.put(MetricEnum.MethodLength, new JavascriptMethodLength());
-        //TODO: Add depth of inheritance tree
+        metricsMap.put(MetricEnum.DepthOfInheritanceTree, new JavascriptDepthOfInheritanceTree());
     }
 
     public static AbstractJavascriptMetric getMetric(MetricEnum metricType) {

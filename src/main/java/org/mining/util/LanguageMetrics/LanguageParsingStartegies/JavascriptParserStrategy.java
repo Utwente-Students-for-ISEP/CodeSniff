@@ -62,14 +62,24 @@ public class JavascriptParserStrategy implements ILanguageParserStrategy{
 
         File sourceFile = new File(sourceDir);
         String sourceDirPath = sourceFile.getAbsolutePath();
+
+        File customRules = new File(outputPath + "/depth-of-inheritance-tree.js");
+        String customRulesPath = customRules.getAbsolutePath();
+
+        ProcessBuilder runProcessBuilder = getProcessBuilder(customRulesPath, sourceDirPath, eslintConfigPath);
+        Process runProcess = runProcessBuilder.start();
+        runProcess.waitFor();
+    }
+
+    private ProcessBuilder getProcessBuilder(String customRulesPath, String sourceDirPath, String eslintConfigPath) {
         ProcessBuilder runProcessBuilder = new ProcessBuilder(
                 "docker", "run", "--name", "eslint-runner",
+                "-v", customRulesPath + ":/app/depth-of-inheritance-tree.js",
                 "-v", sourceDirPath + ":/app",                    // Mounts the source directory to /app in the container
                 "-v", eslintConfigPath + ":/app/eslint.config.js", // Mounts ESLint config file to /app/.eslintrc.js in the container
                 "eslint-analysis");
         runProcessBuilder.inheritIO();
-        Process runProcess = runProcessBuilder.start();
-        runProcess.waitFor();
+        return runProcessBuilder;
     }
 
     private void copyResultFromDocker() throws IOException, InterruptedException {

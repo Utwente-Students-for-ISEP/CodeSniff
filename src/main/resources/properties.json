@@ -1,9 +1,11 @@
 {
-  "repositoryPath": "/path/to/local/repository",
+  "repositoryPath": "C:\\Users\\baran\\Documents\\30DaysOfJavaScript\\projects\\balloon-game",
   "metrics": {
-    "CyclomaticComplexity": {},
+    "CyclomaticComplexity": {
+      "maxCyclomaticComplexity": 100
+    },
     "CouplingBetweenObjects": {
-      "enabled": false
+      "maxDependencies": 20
     },
     "LinesOfCode": {
       "maxMethodLength": 50,
@@ -32,18 +34,9 @@
     "CodeOwnershipByFile": {},
     "BranchTime": {}
   },
-  "languageSpecificSettings": [
-    {
-      "language": "Java",
-      "enabled": true
-    },
-    {
-      "language": "Python",
-      "enabled": false
-    },
-    {
-      "language": "Javascript",
-      "enabled": false
-    }
-  ]
+  "languageSpecificSettings": {
+    "Java": {"enabled":  false},
+    "Javascript": {},
+    "Python": {"enabled": false }
+  }
 }

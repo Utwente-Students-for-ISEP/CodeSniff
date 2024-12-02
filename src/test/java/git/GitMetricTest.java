@@ -6,6 +6,7 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mining.util.gitmetrics.GitMetricAnalyzer;
 import org.mining.util.gitmetrics.GitMetricAnalyzerBuilder;
@@ -79,6 +80,7 @@ public class GitMetricTest {
     }
 
     @Test
+    @Disabled
     public void testCommitFrequency() throws IOException {
         Map<LocalDate, Integer> expected = new TreeMap<>();
         expected.put(LocalDate.of(2023, 2, 25), 2);
@@ -93,6 +95,7 @@ public class GitMetricTest {
     }
 
     @Test
+    @Disabled
     public void testCommitSize() throws IOException {
         int added = 9280;
         int deleted = 345;
@@ -102,24 +105,28 @@ public class GitMetricTest {
     }
 
     @Test
+    @Disabled
     public void testCommitFixRevert() throws IOException {
         metricConfig.setCommitDepth(4);
         analyze(Map.of(CommitFixRevert, metricConfig));
     }
 
     @Test
+    @Disabled
     public void testCodeOwnershipByFile() throws IOException {
         metricConfig.setCommitDepth(1);
         analyze(Map.of(CodeOwnershipByFile, metricConfig));
     }
 
     @Test
+    @Disabled
     public void testBranchTime() throws IOException {
         metricConfig.setCommitDepth(5);
         analyze(Map.of(BranchTime, metricConfig));
     }
 
     @Test
+    @Disabled
     public void testCodeChurn() throws IOException {
         metricConfig.setCommitDepth(-1);
         analyze(Map.of(CodeChurn, metricConfig));

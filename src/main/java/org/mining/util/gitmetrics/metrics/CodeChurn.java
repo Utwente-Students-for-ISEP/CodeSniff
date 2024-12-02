@@ -29,16 +29,26 @@ import java.util.regex.Pattern;
 public class CodeChurn implements GitMetricAnalyzer<Map<String, Map<String, Integer>>> {
 
     private final Map<String, Map<String, Integer>> churnMap = new HashMap<>();
+    private final int commitDepth;
+
+    public CodeChurn(int commitDepth) {
+        this.commitDepth = commitDepth;
+    }
 
     @Override
     public void analyze(Repository repository) {
         try (Git git = new Git(repository)) {
             Iterable<RevCommit> commits = git.log().call();
+            int count = 0;
             for (RevCommit commit : commits) {
+                if (commitDepth > 0 && count >= commitDepth) {
+                    break;
+                }
                 if (commit.getParentCount() > 0) {
                     RevCommit parent = commit.getParent(0);
                     analyzeCommitDiff(repository, parent, commit);
                 }
+                count++;
             }
         } catch (GitAPIException | IOException e) {
             throw new RuntimeException(e);
@@ -115,7 +125,6 @@ public class CodeChurn implements GitMetricAnalyzer<Map<String, Map<String, Inte
         }
         return methods;
     }
-
 
     @Override
     public Map<String, Map<String, Integer>> returnResult() {

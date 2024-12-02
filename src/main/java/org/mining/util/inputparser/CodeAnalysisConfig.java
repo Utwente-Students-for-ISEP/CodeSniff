@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import lombok.Setter;
+import org.mining.util.gitmetrics.GitMetricEnum;
 
 @Getter
 public class CodeAnalysisConfig {
@@ -14,6 +15,9 @@ public class CodeAnalysisConfig {
 
     @JsonProperty("metrics")
     private Map<MetricEnum, MetricConfig> metrics;
+
+    @JsonProperty("git_metrics")
+    private Map<GitMetricEnum, MetricConfig> gitMetrics;
 
     @JsonProperty("languageSpecificSettings")
     private Map<SupportedLanguages, LanguageConfig> languageSpecificSettings;
@@ -28,6 +32,8 @@ public class CodeAnalysisConfig {
         private Integer maxCoupling;
         private Integer maxCyclomaticComplexity;
         private Integer maxDependencies;
+        @Setter //for testing
+        private Integer commitDepth;
 
         @JsonSetter("enabled")
         public void setEnabled(boolean enabled) {

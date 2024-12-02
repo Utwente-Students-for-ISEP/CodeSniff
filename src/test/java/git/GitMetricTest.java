@@ -9,7 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mining.util.gitmetrics.GitMetricAnalyzer;
 import org.mining.util.gitmetrics.GitMetricAnalyzerBuilder;
+import org.mining.util.gitmetrics.GitMetricEnum;
 import org.mining.util.gitmetrics.GitMetricFactory;
+import org.mining.util.inputparser.CodeAnalysisConfig;
 import org.mining.util.inputparser.MetricEnum;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,7 +20,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
-import static org.mining.util.inputparser.MetricEnum.*;
+import static org.mining.util.gitmetrics.GitMetricEnum.*;
 
 public class GitMetricTest {
 
@@ -28,6 +30,8 @@ public class GitMetricTest {
     private File dir;
     private Repository repository;
     private GitMetricAnalyzerBuilder builder;
+
+    private final CodeAnalysisConfig.MetricConfig metricConfig = new CodeAnalysisConfig.MetricConfig();
 
     @BeforeEach
     public void setUp() throws GitAPIException {
@@ -43,10 +47,10 @@ public class GitMetricTest {
         deleteDirectory(dir);
     }
 
-    private void analyze(List<MetricEnum> metrics) throws IOException {
+    private void analyze(Map<GitMetricEnum, CodeAnalysisConfig.MetricConfig> metrics) throws IOException {
         builder = new GitMetricAnalyzerBuilder();
-        for (MetricEnum metricName : metrics) {
-            GitMetricAnalyzer<?> metric = GitMetricFactory.getMetric(metricName);
+        for (Map.Entry<GitMetricEnum, CodeAnalysisConfig.MetricConfig> entry : metrics.entrySet()) {
+            GitMetricAnalyzer<?> metric = GitMetricFactory.getMetric(entry.getKey(), entry.getValue().getCommitDepth());
             builder.addMetric(metric);
         }
         builder.analyze(repository);
@@ -83,35 +87,41 @@ public class GitMetricTest {
         expected.put(LocalDate.of(2023, 8, 8), 1);
         expected.put(LocalDate.of(2023, 12, 28), 1);
         expected.put(LocalDate.of(2024, 11, 13), 4);
-        analyze(new ArrayList<>(List.of(CommitFrequency)));
+        metricConfig.setCommitDepth(-1);
+        analyze(Map.of(CommitFrequency, metricConfig));
         assertEquals(expected, builder.getAnalyzers().get(0).returnResult());
     }
 
     @Test
     public void testCommitSize() throws IOException {
-        int added = 8996;
-        int deleted = 282;
-        analyze(new ArrayList<>(List.of(CommitSize)));
+        int added = 9280;
+        int deleted = 345;
+        metricConfig.setCommitDepth(-1);
+        analyze(Map.of(CommitSize, metricConfig));
         assertEquals(new Pair<>(added, deleted), builder.getAnalyzers().get(0).returnResult());
     }
 
     @Test
     public void testCommitFixRevert() throws IOException {
-        analyze(new ArrayList<>(List.of(CommitFixRevert)));
+        metricConfig.setCommitDepth(4);
+        analyze(Map.of(CommitFixRevert, metricConfig));
     }
 
     @Test
     public void testCodeOwnershipByFile() throws IOException {
-        analyze(new ArrayList<>(List.of(CodeOwnershipByFile)));
+        metricConfig.setCommitDepth(1);
+        analyze(Map.of(CodeOwnershipByFile, metricConfig));
     }
 
     @Test
     public void testBranchTime() throws IOException {
-        analyze(new ArrayList<>(List.of(BranchTime)));
+        metricConfig.setCommitDepth(5);
+        analyze(Map.of(BranchTime, metricConfig));
     }
 
     @Test
     public void testCodeChurn() throws IOException {
-        analyze(new ArrayList<>(List.of(CodeChurn)));
+        metricConfig.setCommitDepth(-1);
+        analyze(Map.of(CodeChurn, metricConfig));
     }
 }

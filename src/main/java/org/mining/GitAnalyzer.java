@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
-import org.mining.util.gitmetrics.GitMetricAnalyzer;
-import org.mining.util.gitmetrics.GitMetricAnalyzerBuilder;
-import org.mining.util.gitmetrics.GitMetricFactory;
-import org.mining.util.gitmetrics.JsonObject;
+import org.mining.util.gitmetrics.*;
 import org.mining.util.inputparser.CodeAnalysisConfig;
 import org.mining.util.inputparser.ConfigParser;
 import org.mining.util.inputparser.MetricEnum;
@@ -16,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 public class GitAnalyzer {
 
@@ -29,8 +27,8 @@ public class GitAnalyzer {
         Repository repository = git.getRepository();
         // Build metric analysis chain
         GitMetricAnalyzerBuilder builder = new GitMetricAnalyzerBuilder();
-        for (MetricEnum metricName : codeAnalysisConfig.getMetrics().keySet()) {
-            GitMetricAnalyzer metric = GitMetricFactory.getMetric(metricName);
+        for (Map.Entry<GitMetricEnum, CodeAnalysisConfig.MetricConfig> entry : codeAnalysisConfig.getGitMetrics().entrySet()) {
+            GitMetricAnalyzer<?> metric = GitMetricFactory.getMetric(entry.getKey(), entry.getValue().getCommitDepth());
             if (metric != null) {
                 builder.addMetric(metric);
             }

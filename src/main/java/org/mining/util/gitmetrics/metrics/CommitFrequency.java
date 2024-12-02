@@ -1,7 +1,5 @@
 package org.mining.util.gitmetrics.metrics;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
@@ -17,16 +15,26 @@ import java.util.TreeMap;
 public class CommitFrequency implements GitMetricAnalyzer<Map<LocalDate, Integer>> {
 
     private final Map<LocalDate, Integer> commitFrequency = new TreeMap<>();
+    private final int commitDepth;
+
+    public CommitFrequency(int commitDepth) {
+        this.commitDepth = commitDepth;
+    }
 
     @Override
     public void analyze(Repository repository) {
         try (RevWalk revWalk = new RevWalk(repository)) {
-            // Resolve the head (master/main branch) to the latest commit
+            // Resolve the head (main/master branch) to the latest commit
             revWalk.markStart(revWalk.parseCommit(repository.resolve("refs/heads/main")));
+            int count = 0;
             for (RevCommit commit : revWalk) {
+                if (commitDepth > 0 && count >= commitDepth) {
+                    break;
+                }
                 LocalDate commitDate = Instant.ofEpochSecond(commit.getCommitTime())
                         .atZone(ZoneId.systemDefault()).toLocalDate();
                 commitFrequency.put(commitDate, commitFrequency.getOrDefault(commitDate, 0) + 1);
+                count++;
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -49,3 +57,4 @@ public class CommitFrequency implements GitMetricAnalyzer<Map<LocalDate, Integer
         return commitFrequency;
     }
 }
+

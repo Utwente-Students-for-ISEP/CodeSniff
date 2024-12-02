@@ -1,5 +1,6 @@
 package org.mining.util.gitmetrics.metrics;
 
+import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.lib.ObjectId;
@@ -34,11 +35,18 @@ import java.util.List;
 public class BranchTime implements GitMetricAnalyzer<List<Long>> {
 
     private final List<Long> branchLifetimes = new ArrayList<>();
+    private final int commitDepth;
+
+    public BranchTime(int commitDepth) {
+        this.commitDepth = commitDepth;
+    }
 
     @Override
     public void analyze(Repository repository) {
         try (Git git = new Git(repository)) {
-            List<Ref> branches = git.branchList().setListMode(org.eclipse.jgit.api.ListBranchCommand.ListMode.ALL).call();
+            List<Ref> branches = git.branchList()
+                    .setListMode(ListBranchCommand.ListMode.ALL)
+                    .call();
             for (Ref branch : branches) {
                 if (branch.getName().endsWith("main") || branch.getName().endsWith("master")) {
                     continue;
@@ -74,13 +82,18 @@ public class BranchTime implements GitMetricAnalyzer<List<Long>> {
     }
 
     private RevCommit getFirstUniqueCommit(Repository repository, Ref branch) throws IOException, GitAPIException {
-        try (Git git = new Git(repository);
-             RevWalk revWalk = new RevWalk(repository)) {
+        try (Git git = new Git(repository)) {
             ObjectId branchId = repository.resolve(branch.getName());
             if (branchId == null) {
                 return null;
             }
-            Iterable<RevCommit> commits = git.log().add(branchId).call();
+
+            LogCommand logCommand = git.log().add(branchId);
+            if (commitDepth > 0) {
+                logCommand.setMaxCount(commitDepth);
+            }
+
+            Iterable<RevCommit> commits = logCommand.call();
             for (RevCommit commit : commits) {
                 return commit;
             }
@@ -89,8 +102,7 @@ public class BranchTime implements GitMetricAnalyzer<List<Long>> {
     }
 
     private RevCommit getMergeCommit(Repository repository, Ref branch) throws IOException, GitAPIException {
-        try (Git git = new Git(repository);
-             RevWalk revWalk = new RevWalk(repository)) {
+        try (Git git = new Git(repository)) {
             ObjectId mainBranchId = repository.resolve("refs/heads/main");
             if (mainBranchId == null) {
                 mainBranchId = repository.resolve("refs/heads/master");
@@ -98,11 +110,18 @@ public class BranchTime implements GitMetricAnalyzer<List<Long>> {
             if (mainBranchId == null) {
                 return null;
             }
-            Iterable<RevCommit> mainCommits = git.log().add(mainBranchId).call();
+
+            LogCommand logCommand = git.log().add(mainBranchId);
+            if (commitDepth > 0) {
+                logCommand.setMaxCount(commitDepth);
+            }
+
+            Iterable<RevCommit> mainCommits = logCommand.call();
             for (RevCommit commit : mainCommits) {
                 if (commit.getParentCount() > 1) {
                     String message = commit.getFullMessage();
-                    if (message.contains(branch.getName()) || message.contains(branch.getName().substring(branch.getName().lastIndexOf("/") + 1))) {
+                    if (message.contains(branch.getName()) ||
+                            message.contains(branch.getName().substring(branch.getName().lastIndexOf("/") + 1))) {
                         return commit;
                     }
                 }
@@ -125,3 +144,4 @@ public class BranchTime implements GitMetricAnalyzer<List<Long>> {
         return String.format("Average Branch Lifetime: %d days, %d hours, %d minutes", days, hours, minutes);
     }
 }
+

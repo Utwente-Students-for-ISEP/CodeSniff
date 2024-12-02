@@ -13,12 +13,21 @@ public class CommitFixRevert implements GitMetricAnalyzer<List<RevCommit>> {
 
     private final List<RevCommit> matchingCommits = new ArrayList<>();
     private final String[] keywords = {"revert", "fix"};
+    private final int commitDepth;
+
+    public CommitFixRevert(int commitDepth) {
+        this.commitDepth = commitDepth;
+    }
 
     @Override
     public void analyze(Repository repository) {
         try (Git git = new Git(repository)) {
             Iterable<RevCommit> commits = git.log().call();
+            int count = 0;
             for (RevCommit commit : commits) {
+                if (commitDepth > 0 && count >= commitDepth) {
+                    break;
+                }
                 String message = commit.getFullMessage().toLowerCase();
                 for (String keyword : keywords) {
                     if (message.contains(keyword)) {
@@ -26,6 +35,7 @@ public class CommitFixRevert implements GitMetricAnalyzer<List<RevCommit>> {
                         break;
                     }
                 }
+                count++;
             }
         } catch (GitAPIException e) {
             throw new RuntimeException(e);
@@ -51,4 +61,5 @@ public class CommitFixRevert implements GitMetricAnalyzer<List<RevCommit>> {
         return matchingCommits;
     }
 }
+
 

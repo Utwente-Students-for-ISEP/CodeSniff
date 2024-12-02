@@ -23,16 +23,32 @@
     "DepthOfInheritanceTree": {
       "maxInheritanceDepth": 5
     },
-    "CommitFrequency": {},
     "Coupling": {
       "maxCoupling": 5
+    }
+  },
+  "git_metrics" : {
+    "MostFrequentClassModified": {
+      "commitDepth" : 10
     },
-    "MostFrequentClassModified": {},
-    "GitChangeStatsPerAuthor": {},
-    "CommitSize": {},
-    "CommitFixRevert": {},
-    "CodeOwnershipByFile": {},
-    "BranchTime": {}
+    "GitChangeStatsPerAuthor": {
+      "commitDepth" : 10
+    },
+    "CommitSize": {
+      "commitDepth" : 10
+    },
+    "CommitFixRevert": {
+      "commitDepth" : 10
+    },
+    "CodeOwnershipByFile": {
+      "commitDepth" : 10
+    },
+    "BranchTime": {
+      "commitDepth" : 10
+    },
+    "CommitFrequency": {
+      "commitDepth" : 10
+    }
   },
   "languageSpecificSettings": {
     "Java": {"enabled":  false},

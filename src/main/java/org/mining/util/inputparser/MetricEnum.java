@@ -8,14 +8,6 @@ public enum MetricEnum {
     GodClassDetection,
     NumberOfParametersPerMethod,
     DepthOfInheritanceTree,
-    Coupling,
-    CommitFrequency,
-    MostFrequentClassModified,
-    GitChangeStatsPerAuthor,
-    CommitSize,
-    CommitFixRevert,
-    CodeOwnershipByFile,
-    BranchTime,
-    CodeChurn
+    Coupling
 
 }

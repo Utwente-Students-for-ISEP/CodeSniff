@@ -19,14 +19,24 @@ import java.util.Map;
 public class CodeOwnershipByFile implements GitMetricAnalyzer<Map<String, Map<String, Integer>>> {
 
     private final Map<String, Map<String, Integer>> fileOwnership = new HashMap<>();
+    private final int commitDepth;
+
+    public CodeOwnershipByFile(int commitDepth) {
+        this.commitDepth = commitDepth;
+    }
 
     @Override
     public void analyze(Repository repository) {
         try (Git git = new Git(repository)) {
             Iterable<RevCommit> commits = git.log().call();
+            int count = 0;
             for (RevCommit commit : commits) {
+                if (commitDepth > 0 && count >= commitDepth) {
+                    break;
+                }
                 String author = commit.getAuthorIdent().getName();
                 analyzeCommitDiff(repository, commit, author);
+                count++;
             }
         } catch (GitAPIException | IOException e) {
             throw new RuntimeException(e);
@@ -86,7 +96,6 @@ public class CodeOwnershipByFile implements GitMetricAnalyzer<Map<String, Map<St
         return result.toString();
     }
 
-
     private String findTopContributor(Map<String, Integer> authorChanges) {
         String topContributor = null;
         int maxChanges = 0;
@@ -99,4 +108,3 @@ public class CodeOwnershipByFile implements GitMetricAnalyzer<Map<String, Map<St
         return topContributor;
     }
 }
-

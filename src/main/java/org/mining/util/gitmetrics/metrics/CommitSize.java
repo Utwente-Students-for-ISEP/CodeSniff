@@ -19,29 +19,33 @@ public class CommitSize implements GitMetricAnalyzer<Pair<Integer, Integer>> {
 
     private int totalLinesAdded = 0;
     private int totalLinesDeleted = 0;
+    private final int commitDepth;
+
+    public CommitSize(int commitDepth) {
+        this.commitDepth = commitDepth;
+    }
 
     @Override
     public void analyze(Repository repository) {
         try (Git git = new Git(repository);
              RevWalk revWalk = new RevWalk(repository)) {
             Iterable<RevCommit> commits = git.log().call();
+            int count = 0;
             for (RevCommit commit : commits) {
+                if (commitDepth > 0 && count >= commitDepth) {
+                    break;
+                }
                 // Skip merge commits
                 if (commit.getParentCount() == 0) {
                     continue;
                 }
-
                 // Get the parent commit
                 RevCommit parentCommit = revWalk.parseCommit(commit.getParent(0));
-
-                // Print the commit message
                 System.out.println("Commit: " + commit.getShortMessage());
-
                 // Analyze the diff between the commit and its parent
                 analyzeCommitDiff(repository, parentCommit, commit);
+                count++;
             }
-
-            // Print total added and deleted lines
             System.out.println("\nTotal Lines Added: " + totalLinesAdded);
             System.out.println("Total Lines Deleted: " + totalLinesDeleted);
 

@@ -1,16 +1,15 @@
-package MetricAnalyzerTest;
+package org.mining.util.LanguageMetrics;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mining.util.LanguageMetrics.MetricAnalyzer;
 import org.mining.util.inputparser.CodeAnalysisConfig;
 import org.mining.util.inputparser.ConfigParser;
 
 import java.io.*;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class MetricAnalyzerJavascriptTest {
+class MetricAnalyzerTest {
 
     private MetricAnalyzer metricAnalyzer;
     private CodeAnalysisConfig codeAnalysisConfig;
@@ -62,8 +61,5 @@ public class MetricAnalyzerJavascriptTest {
 
         assertTrue(lineFound, "The file does not contain the expected line.");
     }
-
-
-
 
 }

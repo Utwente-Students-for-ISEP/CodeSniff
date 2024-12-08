@@ -6,5 +6,7 @@ public enum GitMetricEnum {
     CommitFixRevert,
     CodeOwnershipByFile,
     BranchTime,
-    CodeChurn
+    CodeChurn,
+    MostFrequentClassModified,
+    GitChangeStatsPerAuthor
 }

@@ -1,5 +1,5 @@
 {
-  "repositoryPath": "C:\\Users\\baran\\Documents\\30DaysOfJavaScript\\projects\\balloon-game",
+  "repositoryPath": "",
   "metrics": {
     "CyclomaticComplexity": {
       "maxCyclomaticComplexity": 100
@@ -21,7 +21,7 @@
       "maxParameters": 5
     },
     "DepthOfInheritanceTree": {
-      "maxInheritanceDepth": 5
+      "maxInheritanceDepth": 2
     },
     "Coupling": {
       "maxCoupling": 5

@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.mining.util.gitmetrics.GitMetricEnum;
 
 @Getter
+@Setter
 public class CodeAnalysisConfig {
     private String repositoryPath;
 

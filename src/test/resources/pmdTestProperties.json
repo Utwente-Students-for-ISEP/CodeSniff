@@ -1,68 +1,58 @@
 {
-  "repositoryPath": "D:/GitHub Repos/set2024team06project/src",
+  "repositoryPath": "D:\\GitHub Repos\\CodeSniff\\src",
   "metrics": {
     "CyclomaticComplexity": {
-      "enabled": true
+      "maxCyclomaticComplexity": 100
     },
     "CouplingBetweenObjects": {
-      "enabled": true
+      "maxDependencies": 20
     },
     "LinesOfCode": {
-      "enabled": true,
       "maxMethodLength": 50,
       "classSizeThreshold": 1000
     },
     "MethodLength": {
-      "enabled": true,
       "maxMethodLength": 50
     },
     "GodClassDetection": {
-      "enabled": true,
       "classSizeThreshold": 1000
     },
     "NumberOfParametersPerMethod": {
-      "enabled": true,
       "maxParameters": 5
     },
     "DepthOfInheritanceTree": {
-      "enabled": true,
       "maxInheritanceDepth": 5
     },
-    "CommitFrequency": {
-      "enabled": true
-    },
     "Coupling": {
-      "enabled": true,
       "maxCoupling": 5
-    },
+    }
+  },
+  "git_metrics" : {
     "MostFrequentClassModified": {
-      "enabled": true
+      "commitDepth" : 10
     },
     "GitChangeStatsPerAuthor": {
-      "enabled": true
+      "commitDepth" : 10
     },
     "CommitSize": {
-      "enabled": true
+      "commitDepth" : 10
     },
     "CommitFixRevert": {
-      "enabled": true
+      "commitDepth" : 10
     },
     "CodeOwnershipByFile": {
-      "enabled": true
+      "commitDepth" : 10
     },
     "BranchTime": {
-      "enabled": true
+      "commitDepth" : 10
+    },
+    "CommitFrequency": {
+      "commitDepth" : 10
     }
   },
   "languageSpecificSettings": {
-    "java": {
-      "enabled": true
-    },
-    "python": {
-      "enabled": false
-    },
-    "javascript": {
-      "enabled": false
-    }
+    "Java": {"enabled":  true},
+    "Javascript": {"enabled": false},
+    "Python": {"enabled": false }
   }
 }

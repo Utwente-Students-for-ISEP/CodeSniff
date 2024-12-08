@@ -17,7 +17,7 @@ public class MetricAnalyzerJavascriptTest {
 
     @BeforeEach
     public void setUp() throws IOException {
-        InputStream configInputStream = getClass().getClassLoader().getResourceAsStream("properties.json");
+        InputStream configInputStream = getClass().getClassLoader().getResourceAsStream("propertiesJavascript.json");
         if (configInputStream == null) {
             throw new IllegalArgumentException("Config file not found!");
         }

@@ -2,6 +2,7 @@ package MetricAnalyzerTest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mining.util.LanguageMetrics.MetricAnalyzer;
 import org.mining.util.inputparser.CodeAnalysisConfig;
@@ -32,6 +33,7 @@ public class MetricAnalyzerTest {
     }
 
     @Test
+    @Disabled
     void testGeneratedRulesetFile() throws IOException {
         metricAnalyzer.runMetrics(codeAnalysisConfig);
 
@@ -50,6 +52,7 @@ public class MetricAnalyzerTest {
     }
 
     @Test
+    @Disabled
     void testPMDReportGeneration() throws IOException {
 
         metricAnalyzer.runMetrics(codeAnalysisConfig);

@@ -69,7 +69,7 @@ public class CodeChurn implements GitMetricAnalyzer<Map<String, Map<String, Inte
             List<DiffEntry> diffs = diffFormatter.scan(parentTreeParser, commitTreeParser);
             for (DiffEntry entry : diffs) {
                 String filePath = entry.getNewPath();
-                BaseChurn.processJavaScriptFileChanges(repository, commit, filePath, churnMap, getFileExtension(filePath));
+                BaseChurn.processFileChanges(repository, commit, filePath, churnMap, getFileExtension(filePath));
             }
         }
     }

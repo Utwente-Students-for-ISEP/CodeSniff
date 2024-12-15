@@ -38,14 +38,14 @@ public class JavaChurn extends BaseChurn {
         @Override
         public void enterMethodDeclaration(JavaParser.MethodDeclarationContext ctx) {
             String methodName = ctx.identifier().getText();
-            List<String> parameterList = extractParameters(ctx.formalParameters());
+            List<String> parameterList = getParameters(ctx.formalParameters());
             String methodSignature = ctx.typeTypeOrVoid() != null ? ctx.typeTypeOrVoid().getText() + " " + methodName : methodName;
             methodSignature += "(" + String.join(", ", parameterList) + ")";
             int lineNumber = ctx.start.getLine();
             methods.add(new MethodRange(methodSignature, lineNumber, null));
         }
 
-        private List<String> extractParameters(JavaParser.FormalParametersContext formalParametersContext) {
+        private List<String> getParameters(JavaParser.FormalParametersContext formalParametersContext) {
             List<String> parameterList = new ArrayList<>();
             if (formalParametersContext != null && formalParametersContext.formalParameterList() != null) {
                 for (JavaParser.FormalParameterContext paramContext : formalParametersContext.formalParameterList().formalParameter()) {

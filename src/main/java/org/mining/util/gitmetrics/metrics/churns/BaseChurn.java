@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class BaseChurn {
 
-    public static void processJavaScriptFileChanges(Repository repository, RevCommit commit, String filePath, Map<String, Map<String, Integer>> churnMap, String lang) throws IOException {
+    public static void processFileChanges(Repository repository, RevCommit commit, String filePath, Map<String, Map<String, Integer>> churnMap, String lang) throws IOException {
         String fileContent = BaseChurn.readFileFromCommit(repository, commit, filePath);
         if (fileContent == null) return;
         List<MethodRange> methods;

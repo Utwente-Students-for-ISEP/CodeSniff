@@ -7,6 +7,5 @@ public enum GitMetricEnum {
     CodeOwnershipByFile,
     BranchTime,
     CodeChurn,
-    MostFrequentClassModified,
-    GitChangeStatsPerAuthor
+    BranchCountWithAuthors
 }

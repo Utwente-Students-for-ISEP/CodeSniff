@@ -48,6 +48,9 @@
     },
     "CommitFrequency": {
       "commitDepth" : 10
+    },
+    "BranchCountWithAuthors": {
+      "commitDepth" : 10
     }
   },
   "languageSpecificSettings": {

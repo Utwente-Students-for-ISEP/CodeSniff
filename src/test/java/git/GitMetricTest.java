@@ -25,8 +25,8 @@ import static org.mining.util.gitmetrics.GitMetricEnum.*;
 public class GitMetricTest {
 
     private final String dir_url = "tempDir";
-//    private String url = "https://github.com/dkrgn/SearchEngine.git";
-    private String url = "https://github.com/dkrgn/test-repo-for-mining.git";
+    private String url = "https://github.com/dkrgn/SearchEngine.git";
+//    private String url = "https://github.com/dkrgn/test-repo-for-mining.git";
     private Git git;
     private File dir;
     private Repository repository;
@@ -130,5 +130,11 @@ public class GitMetricTest {
     public void testCodeChurn() throws IOException {
         metricConfig.setCommitDepth(-1);
         analyze(Map.of(CodeChurn, metricConfig));
+    }
+
+    @Test
+    public void testBranchCountWithAuthors() throws IOException {
+        metricConfig.setCommitDepth(-1);
+        analyze(Map.of(BranchCountWithAuthors, metricConfig));
     }
 }

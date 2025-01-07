@@ -6,6 +6,6 @@ public class JavascriptMethodLength extends AbstractJavascriptMetric{
     @Override
     public void generateMetric(CodeAnalysisConfig.MetricConfig config, StringBuilder sbBuilder) {
         sbBuilder.append("      'max-lines-per-function': ['warn', { 'max': "+ config.getMaxMethodLength()
-                +"50, 'skipComments': true, 'skipBlankLines': true }],\n");
+                +", 'skipComments': true, 'skipBlankLines': true }],\n");
     }
 }

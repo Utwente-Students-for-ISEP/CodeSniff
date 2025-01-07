@@ -28,12 +28,6 @@
     }
   },
   "git_metrics" : {
-    "MostFrequentClassModified": {
-      "commitDepth" : 10
-    },
-    "GitChangeStatsPerAuthor": {
-      "commitDepth" : 10
-    },
     "CommitSize": {
       "commitDepth" : 10
     },
@@ -50,6 +44,9 @@
       "commitDepth" : 10
     },
     "BranchCountWithAuthors": {
+      "commitDepth" : 10
+    },
+    "CodeChurn": {
       "commitDepth" : 10
     }
   },

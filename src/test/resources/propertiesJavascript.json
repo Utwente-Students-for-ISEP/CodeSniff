@@ -2,38 +2,31 @@
   "repositoryPath": "",
   "metrics": {
     "CyclomaticComplexity": {
-      "maxCyclomaticComplexity": 100
+      "maxCyclomaticComplexity": 2
     },
     "CouplingBetweenObjects": {
-      "maxDependencies": 20
+      "maxDependencies": 2
     },
     "LinesOfCode": {
-      "maxMethodLength": 50,
-      "classSizeThreshold": 1000
+      "classSizeThreshold": 10
     },
     "MethodLength": {
-      "maxMethodLength": 50
+      "maxMethodLength": 5
     },
     "GodClassDetection": {
-      "classSizeThreshold": 1000
+      "classSizeThreshold": 10
     },
     "NumberOfParametersPerMethod": {
-      "maxParameters": 5
+      "maxParameters": 4
     },
     "DepthOfInheritanceTree": {
       "maxInheritanceDepth": 2
     },
     "Coupling": {
-      "maxCoupling": 5
+      "maxCoupling": 1
     }
   },
   "git_metrics" : {
-    "MostFrequentClassModified": {
-      "commitDepth" : 10
-    },
-    "GitChangeStatsPerAuthor": {
-      "commitDepth" : 10
-    },
     "CommitSize": {
       "commitDepth" : 10
     },
@@ -47,6 +40,12 @@
       "commitDepth" : 10
     },
     "CommitFrequency": {
+      "commitDepth" : 10
+    },
+    "BranchCountWithAuthors": {
+      "commitDepth" : 10
+    },
+    "CodeChurn": {
       "commitDepth" : 10
     }
   },

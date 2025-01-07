@@ -137,4 +137,42 @@ public class GitMetricTest {
         metricConfig.setCommitDepth(-1);
         analyze(Map.of(BranchCountWithAuthors, metricConfig));
     }
+
+    @Test
+    public void testAllMetrics() throws IOException {
+        // Prepare configurations for each metric
+        Map<GitMetricEnum, CodeAnalysisConfig.MetricConfig> metrics = new HashMap<>();
+
+        // Define commit depth configurations for each metric as needed
+        CodeAnalysisConfig.MetricConfig commitFrequencyConfig = new CodeAnalysisConfig.MetricConfig();
+        commitFrequencyConfig.setCommitDepth(-1);
+        metrics.put(CommitFrequency, commitFrequencyConfig);
+
+        CodeAnalysisConfig.MetricConfig commitSizeConfig = new CodeAnalysisConfig.MetricConfig();
+        commitSizeConfig.setCommitDepth(-1);
+        metrics.put(CommitSize, commitSizeConfig);
+
+        CodeAnalysisConfig.MetricConfig commitFixRevertConfig = new CodeAnalysisConfig.MetricConfig();
+        commitFixRevertConfig.setCommitDepth(4);
+        metrics.put(CommitFixRevert, commitFixRevertConfig);
+
+        CodeAnalysisConfig.MetricConfig codeOwnershipByFileConfig = new CodeAnalysisConfig.MetricConfig();
+        codeOwnershipByFileConfig.setCommitDepth(-1);
+        metrics.put(CodeOwnershipByFile, codeOwnershipByFileConfig);
+
+        CodeAnalysisConfig.MetricConfig branchTimeConfig = new CodeAnalysisConfig.MetricConfig();
+        branchTimeConfig.setCommitDepth(5);
+        metrics.put(BranchTime, branchTimeConfig);
+
+        CodeAnalysisConfig.MetricConfig codeChurnConfig = new CodeAnalysisConfig.MetricConfig();
+        codeChurnConfig.setCommitDepth(-1);
+        metrics.put(CodeChurn, codeChurnConfig);
+
+        CodeAnalysisConfig.MetricConfig branchCountWithAuthorsConfig = new CodeAnalysisConfig.MetricConfig();
+        branchCountWithAuthorsConfig.setCommitDepth(-1);
+        metrics.put(BranchCountWithAuthors, branchCountWithAuthorsConfig);
+
+        // Analyze all metrics
+        analyze(metrics);
+        }
 }

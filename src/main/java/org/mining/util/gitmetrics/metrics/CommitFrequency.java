@@ -3,7 +3,11 @@ package org.mining.util.gitmetrics.metrics;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.mining.util.gitmetrics.GitMetricAnalyzer;
+import org.mining.util.gitmetrics.JSONReflectUtil;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -39,6 +43,20 @@ public class CommitFrequency implements GitMetricAnalyzer<Map<LocalDate, Integer
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public JSONObject returnJSONResult() throws JSONException {
+        JSONArray arr = new JSONArray();
+        for (Map.Entry<LocalDate, Integer> entry : commitFrequency.entrySet()) {
+            arr.put(new JSONObject()
+                    .put("date", entry.getKey().toString())
+                    .put("commits", entry.getValue()));
+        }
+        JSONObject ref = new JSONObject();
+        JSONReflectUtil.reflect(ref);
+        return ref.put("metricName", "Commit Frequency")
+                .put("result", arr);
     }
 
     @Override

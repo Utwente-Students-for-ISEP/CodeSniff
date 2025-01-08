@@ -10,7 +10,11 @@ import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.eclipse.jgit.util.io.NullOutputStream;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.mining.util.gitmetrics.GitMetricAnalyzer;
+import org.mining.util.gitmetrics.JSONReflectUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -111,6 +115,17 @@ public class CommitSize implements GitMetricAnalyzer<Pair<Integer, Integer>> {
     @Override
     public Pair<Integer, Integer> returnResult() {
         return new Pair<>(totalLinesAdded, totalLinesDeleted);
+    }
+
+    @Override
+    public JSONObject returnJSONResult() throws JSONException {
+        JSONObject ref = new JSONObject();
+        JSONReflectUtil.reflect(ref);
+        return ref.put("metricName", "Commit Size")
+                .put("result", new JSONArray()
+                        .put(new JSONObject().put("totalLinesAdded", totalLinesAdded))
+                        .put(new JSONObject().put("totalLinesDeleted", totalLinesDeleted))
+                );
     }
 
     @Override

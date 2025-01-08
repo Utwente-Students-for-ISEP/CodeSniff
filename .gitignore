@@ -37,4 +37,3 @@ build/
 ### Mac OS ###
 .DS_Store
 .idea
-./src/main/resources/analysis_results.txt

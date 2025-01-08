@@ -8,6 +8,8 @@ import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.mining.util.gitmetrics.GitMetricAnalyzer;
 import org.eclipse.jgit.api.ListBranchCommand;
 
@@ -26,6 +28,7 @@ import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
+import org.mining.util.gitmetrics.JSONReflectUtil;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -128,6 +131,14 @@ public class BranchTime implements GitMetricAnalyzer<List<Long>> {
             }
         }
         return null;
+    }
+
+    @Override
+    public JSONObject returnJSONResult() throws JSONException {
+        JSONObject ref = new JSONObject();
+        JSONReflectUtil.reflect(ref);
+        return ref.put("metricName", "Branch Time")
+                .put("result", toString());
     }
 
     @Override

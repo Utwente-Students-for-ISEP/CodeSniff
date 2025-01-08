@@ -4,7 +4,11 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.mining.util.gitmetrics.GitMetricAnalyzer;
+import org.mining.util.gitmetrics.JSONReflectUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +44,23 @@ public class CommitFixRevert implements GitMetricAnalyzer<List<RevCommit>> {
         } catch (GitAPIException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public JSONObject returnJSONResult() throws JSONException {
+        JSONArray arr = new JSONArray();
+        for (RevCommit commit : matchingCommits) {
+            arr.put(new JSONObject()
+                    .put("commitID", commit.getId().getName())
+                    .put("author", commit.getAuthorIdent().getName())
+                    .put("date", commit.getAuthorIdent().getWhen())
+                    .put("message", commit.getFullMessage())
+            );
+        }
+        JSONObject ref = new JSONObject();
+        JSONReflectUtil.reflect(ref);
+        return ref.put("metricName", "CommitFixRevert")
+                .put("result", arr);
     }
 
     @Override

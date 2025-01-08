@@ -11,7 +11,7 @@ public class GitMetricFactory {
             case CodeOwnershipByFile -> new CodeOwnershipByFile(depth);
             case BranchTime -> new BranchTime(depth);
             case CodeChurn -> new CodeChurn(depth);
-            case BranchCountWithAuthors -> new BranchCountWithAuthors(depth);
+            case BranchCountWithAuthors -> new BranchCountWithAuthors();
         };
     }
 }

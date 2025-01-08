@@ -8,7 +8,11 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.mining.util.gitmetrics.GitMetricAnalyzer;
+import org.mining.util.gitmetrics.JSONReflectUtil;
 import org.mining.util.gitmetrics.metrics.churns.BaseChurn;
 
 import java.io.ByteArrayOutputStream;
@@ -90,6 +94,31 @@ public class CodeChurn implements GitMetricAnalyzer<Map<String, Map<String, Inte
     @Override
     public Map<String, Map<String, Integer>> returnResult() {
         return resultMap;
+    }
+
+    @Override
+    public JSONObject returnJSONResult() throws JSONException {
+        JSONObject result = new JSONObject();
+        JSONArray filesArray = new JSONArray();
+        for (String filePath : resultMap.keySet()) {
+            JSONObject fileObject = new JSONObject();
+            JSONReflectUtil.reflect(fileObject);
+            fileObject.put("filePath", filePath).put("methods", new JSONArray());
+            Map<String, Integer> methodChurnMap = resultMap.get(filePath);
+            for (Map.Entry<String, Integer> entry : methodChurnMap.entrySet()) {
+                String methodName = entry.getKey();
+                int modificationCount = entry.getValue();
+                fileObject.getJSONArray("methods").put(new JSONObject()
+                        .put("methodName", methodName)
+                        .put("modifications", modificationCount));
+            }
+            filesArray.put(fileObject);
+        }
+        result.put("files", filesArray);
+        JSONObject ref = new JSONObject();
+        JSONReflectUtil.reflect(ref);
+        return ref.put("metricName", "Code Churn")
+                .put("result", result);
     }
 
     @Override

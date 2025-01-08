@@ -2,6 +2,9 @@ package org.mining.util.gitmetrics;
 
 import lombok.Getter;
 import org.eclipse.jgit.lib.Repository;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,25 +17,27 @@ import java.util.List;
 @Getter
 public class GitMetricAnalyzerBuilder {
     private final List<GitMetricAnalyzer<?>> analyzers = new ArrayList<>();
-    private final StringBuilder resultBuilder = new StringBuilder();
+    private final JSONObject result = new JSONObject();
 
     public void addMetric(GitMetricAnalyzer<?> analyzer) {
         analyzers.add(analyzer);
     }
 
-    public void analyze(Repository repository) throws IOException {
+    public void analyze(Repository repository) throws IOException, JSONException {
+        JSONArray arr = new JSONArray();
         for (GitMetricAnalyzer<?> analyzer : analyzers) {
             analyzer.analyze(repository);
-            resultBuilder.append(analyzer).append("\n");
+            arr.put(analyzer.returnJSONResult());
         }
-        writeResultsToFile();
+        result.put("metrics", arr);
+        writeResultsToFile(result);
     }
 
-    private void writeResultsToFile() throws IOException {
-        String resourcePath = Paths.get("src", "main", "resources", "analysis_results.txt").toString();
+    private void writeResultsToFile(JSONObject res) throws IOException, JSONException {
+        String resourcePath = Paths.get("src", "main", "resources", "analysis_results.json").toString();
         File file = new File(resourcePath);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            writer.write(resultBuilder.toString());
+            writer.write(res.toString(4));
         }
         System.out.println("Analysis results written to: " + file.getAbsolutePath());
     }

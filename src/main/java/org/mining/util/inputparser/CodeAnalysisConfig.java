@@ -34,7 +34,7 @@ public class CodeAnalysisConfig {
         private Integer maxCyclomaticComplexity;
         private Integer maxDependencies;
         @Setter //for testing
-        private Integer commitDepth;
+        private Integer commitDepth = -1;
 
         @JsonSetter("enabled")
         public void setEnabled(boolean enabled) {

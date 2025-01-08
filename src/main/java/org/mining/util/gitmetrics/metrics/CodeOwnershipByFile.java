@@ -8,7 +8,11 @@ import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.mining.util.gitmetrics.GitMetricAnalyzer;
+import org.mining.util.gitmetrics.JSONReflectUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -71,6 +75,38 @@ public class CodeOwnershipByFile implements GitMetricAnalyzer<Map<String, Map<St
         CanonicalTreeParser treeParser = new CanonicalTreeParser();
         treeParser.reset(repository.newObjectReader(), commit.getTree());
         return treeParser;
+    }
+
+    @Override
+    public JSONObject returnJSONResult() throws JSONException {
+        JSONObject result = new JSONObject();
+        JSONArray filesArray = new JSONArray();
+        for (String filePath : fileOwnership.keySet()) {
+            Map<String, Integer> authorChanges = fileOwnership.get(filePath);
+            int totalChanges = authorChanges.values().stream().mapToInt(Integer::intValue).sum();
+            String topContributor = findTopContributor(authorChanges);
+            JSONObject fileObject = new JSONObject()
+                    .put("filePath", filePath)
+                    .put("topContributor", new JSONObject()
+                            .put("name", topContributor)
+                            .put("percentage", authorChanges.get(topContributor) * 100.0 / totalChanges))
+                    .put("contributors", new JSONArray());
+            for (Map.Entry<String, Integer> entry : authorChanges.entrySet()) {
+                String author = entry.getKey();
+                int changes = entry.getValue();
+                double percentage = (double) changes / totalChanges * 100;
+                fileObject.getJSONArray("contributors").put(new JSONObject()
+                        .put("author", author)
+                        .put("changes", changes)
+                        .put("percentage", percentage));
+            }
+            filesArray.put(fileObject);
+        }
+        result.put("files", filesArray);
+        JSONObject ref = new JSONObject();
+        JSONReflectUtil.reflect(ref);
+        return ref.put("metricName", "Code Ownership By File")
+                .put("result", result);
     }
 
     @Override

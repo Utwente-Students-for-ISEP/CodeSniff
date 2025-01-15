@@ -61,8 +61,7 @@ class GitAnalyzerTest {
         String currentDirectory = System.getProperty("user.dir");
 
         // Create the folder path
-        File folder = new File(currentDirectory + File.separator + "src" + File.separator +
-                "test" + File.separator + "resources");
+        File folder = new File(currentDirectory);
         codeAnalysisConfig.setRepositoryPath(folder.getAbsolutePath());
 
         MetricAnalyzer metricAnalyzer = new MetricAnalyzer();

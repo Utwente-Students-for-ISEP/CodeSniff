@@ -24,6 +24,7 @@ public class CodeAnalysisConfig {
     private Map<SupportedLanguages, LanguageConfig> languageSpecificSettings;
 
     @Getter
+    @Setter
     public static class MetricConfig {
         private boolean enabled = true;
         private Integer maxMethodLength;

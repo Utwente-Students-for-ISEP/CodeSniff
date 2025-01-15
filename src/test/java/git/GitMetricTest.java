@@ -83,7 +83,6 @@ public class GitMetricTest {
     }
 
     @Test
-    @Disabled
     public void testCommitFrequency() throws IOException, JSONException {
 //        Map<LocalDate, Integer> expected = new TreeMap<>();
 //        expected.put(LocalDate.of(2023, 2, 25), 2);
@@ -98,7 +97,6 @@ public class GitMetricTest {
     }
 
     @Test
-    @Disabled
     public void testCommitSize() throws IOException, JSONException {
 //        int added = 9095; //9280 real values, substituted with actual for test not to fail in ci pipeline
 //        int deleted = 326; //345;
@@ -108,28 +106,24 @@ public class GitMetricTest {
     }
 
     @Test
-    @Disabled
     public void testCommitFixRevert() throws IOException, JSONException {
         metricConfig.setCommitDepth(4);
         analyze(Map.of(CommitFixRevert, metricConfig));
     }
 
     @Test
-    @Disabled
     public void testCodeOwnershipByFile() throws IOException, JSONException {
         metricConfig.setCommitDepth(-1);
         analyze(Map.of(CodeOwnershipByFile, metricConfig));
     }
 
     @Test
-    @Disabled
     public void testBranchTime() throws IOException, JSONException {
         metricConfig.setCommitDepth(5);
         analyze(Map.of(BranchTime, metricConfig));
     }
 
     @Test
-    @Disabled
     public void testCodeChurn() throws IOException, JSONException {
         metricConfig.setCommitDepth(-1);
         analyze(Map.of(CodeChurn, metricConfig));

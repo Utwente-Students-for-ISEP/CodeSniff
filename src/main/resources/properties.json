@@ -18,13 +18,13 @@
       "classSizeThreshold": 1000
     },
     "NumberOfParametersPerMethod": {
-      "maxParameters": 5
+      "maxParameters": 4
     },
     "DepthOfInheritanceTree": {
       "maxInheritanceDepth": 2
     },
     "Coupling": {
-      "maxCoupling": 5
+      "maxCoupling": 1
     }
   },
   "git_metrics" : {
@@ -51,7 +51,7 @@
     }
   },
   "languageSpecificSettings": {
-    "Java": {"enabled":  false},
+    "Java": {},
     "Javascript": {},
     "Python": {"enabled": false }
   }

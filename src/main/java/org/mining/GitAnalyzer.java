@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
+import org.mining.util.LanguageMetrics.MetricAnalyzer;
 import org.mining.util.gitmetrics.*;
 import org.mining.util.inputparser.CodeAnalysisConfig;
 import org.mining.util.inputparser.ConfigParser;
@@ -33,6 +34,8 @@ public class GitAnalyzer {
                 builder.addMetric(metric);
             }
         }
+        MetricAnalyzer metricAnalyzer = new MetricAnalyzer();
+        metricAnalyzer.runMetrics(codeAnalysisConfig);
         // Analyze metrics
         builder.analyze(repository);
         //Cleanup

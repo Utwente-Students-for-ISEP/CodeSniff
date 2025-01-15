@@ -45,13 +45,13 @@ public class CommitSize implements GitMetricAnalyzer<Pair<Integer, Integer>> {
                 }
                 // Get the parent commit
                 RevCommit parentCommit = revWalk.parseCommit(commit.getParent(0));
-                System.out.println("Commit: " + commit.getShortMessage());
+                //System.out.println("Commit: " + commit.getShortMessage());
                 // Analyze the diff between the commit and its parent
                 analyzeCommitDiff(repository, parentCommit, commit);
                 count++;
             }
-            System.out.println("\nTotal Lines Added: " + totalLinesAdded);
-            System.out.println("Total Lines Deleted: " + totalLinesDeleted);
+            //System.out.println("\nTotal Lines Added: " + totalLinesAdded);
+            //System.out.println("Total Lines Deleted: " + totalLinesDeleted);
 
         } catch (Exception e) {
             e.printStackTrace();

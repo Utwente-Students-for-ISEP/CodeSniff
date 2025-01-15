@@ -36,7 +36,7 @@ public class JavascriptRulesetGenerator implements ILanguageMetricGenerator{
         stringBuilder.append("const sonarjsPlugin = require('eslint-plugin-sonarjs');\n\n");
         stringBuilder.append("module.exports = [\n");
         stringBuilder.append("  {\n");
-        stringBuilder.append("    files: ['*.js'],\n");
+        stringBuilder.append("    files: ['**/*.js'],\n");
         stringBuilder.append("    plugins: {\n");
         stringBuilder.append("      import: importPlugin,\n");
         stringBuilder.append("      sonarjs: sonarjsPlugin,\n");

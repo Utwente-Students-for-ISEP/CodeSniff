@@ -14,7 +14,7 @@ import java.util.Properties;
 
 public class JavaParserStrategy implements ILanguageParserStrategy {
     private static String rulesetFilePath;
-    private static final String reportPath = "src/test/resources/PMDreport.txt";
+    private static final String reportPath = "src/test/resources/PMDreport.sarif";
 
     static {
         try (InputStream input = new FileInputStream("src/main/config.properties")) {
@@ -43,15 +43,15 @@ public class JavaParserStrategy implements ILanguageParserStrategy {
         configuration.prependAuxClasspath("target");
 
 
-        configuration.setReportFormat("text");
+        configuration.setReportFormat("sarif");
         configuration.setReportFile(Path.of(reportPath));
 
-        Writer rendererOutput = new StringWriter();
-        Renderer renderer = createRenderer(rendererOutput);
+//        Writer rendererOutput = new StringWriter();
+//        Renderer renderer = createRenderer(rendererOutput);
 
         try (PmdAnalysis pmd = PmdAnalysis.create(configuration)) {
             pmd.addRuleSet(pmd.newRuleSetLoader().loadFromResource(rulesetFilePath));
-            pmd.addRenderer(renderer);
+            //pmd.addRenderer(renderer);
             pmd.performAnalysis();
         }
     }

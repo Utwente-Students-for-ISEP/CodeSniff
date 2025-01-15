@@ -54,7 +54,7 @@ public class MetricAnalyzerTest {
     void testPMDReportGeneration() throws IOException {
 
         metricAnalyzer.runMetrics(codeAnalysisConfig);
-        File generatedFile = new File("src/test/resources/PMDreport.txt");
+        File generatedFile = new File("src/test/resources/PMDreport.sarif");
         assertTrue(generatedFile.exists(), "Generated ruleset file does not exist");
     }
     private String normalizeContent(String content) {

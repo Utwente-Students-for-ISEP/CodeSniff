@@ -73,7 +73,7 @@ class GitAnalyzerTest {
         codeAnalysisConfig.setLanguageSpecificSettings(map);
         metricAnalyzer.runMetrics(codeAnalysisConfig);
         File jsReport = new File(currentDirectory + File.separator + "src" + File.separator +
-                "test" + File.separator + "resources" + File.separator +
+                "main" + File.separator + "resources" + File.separator +
                 "eslint_report.txt");
         assertTrue(jsReport.exists());
 

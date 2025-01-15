@@ -44,6 +44,7 @@ public class CodeAnalysisConfig {
     }
 
     @Getter
+    @Setter
     public static class LanguageConfig {
         private boolean enabled = true;
 

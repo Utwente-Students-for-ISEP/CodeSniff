@@ -72,7 +72,7 @@ public class CommitSize implements GitMetricAnalyzer<Pair<Integer, Integer>> {
 
             for (DiffEntry entry : diffs) {
                 // Print file path of the change
-                System.out.println("File: " + entry.getNewPath());
+                //System.out.println("File: " + entry.getNewPath());
 
                 // Get the list of edits (insertions, deletions, modifications)
                 EditList edits = diffFormatter.toFileHeader(entry).toEditList();
@@ -82,19 +82,19 @@ public class CommitSize implements GitMetricAnalyzer<Pair<Integer, Integer>> {
                         case INSERT:
                             int linesAdded = edit.getEndB() - edit.getBeginB();
                             totalLinesAdded += linesAdded;
-                            System.out.println("  + Added lines: " + linesAdded);
+                            //System.out.println("  + Added lines: " + linesAdded);
                             break;
                         case DELETE:
                             int linesDeleted = edit.getEndA() - edit.getBeginA();
                             totalLinesDeleted += linesDeleted;
-                            System.out.println("  - Deleted lines: " + linesDeleted);
+                            //System.out.println("  - Deleted lines: " + linesDeleted);
                             break;
                         case REPLACE:
                             int replaceAdded = edit.getEndB() - edit.getBeginB();
                             int replaceDeleted = edit.getEndA() - edit.getBeginA();
                             totalLinesAdded += replaceAdded;
                             totalLinesDeleted += replaceDeleted;
-                            System.out.println("  ~ Replaced lines: Added " + replaceAdded + ", Deleted " + replaceDeleted);
+                            //System.out.println("  ~ Replaced lines: Added " + replaceAdded + ", Deleted " + replaceDeleted);
                             break;
                         default:
                             break;

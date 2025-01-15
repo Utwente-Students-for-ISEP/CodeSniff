@@ -20,7 +20,7 @@ public class GitAnalyzer {
 
     private static String url;
     private static String dir_url;
-    private static CodeAnalysisConfig codeAnalysisConfig;
+    static CodeAnalysisConfig codeAnalysisConfig;
 
     public static void main(String[] args) throws Exception {
         getConfig();
@@ -50,7 +50,7 @@ public class GitAnalyzer {
                 .call();
     }
 
-    private static void deleteDirectory(File directory) {
+    static void deleteDirectory(File directory) {
         if (directory.isDirectory()) {
             File[] files = directory.listFiles();
             if (files != null) {
@@ -65,7 +65,7 @@ public class GitAnalyzer {
         }
     }
 
-    private static void getConfig() throws IOException {
+    static void getConfig() throws IOException {
         InputStream input = GitAnalyzer.class.getClassLoader().getResourceAsStream("properties.json");
         if (input == null) {
             throw new IllegalArgumentException("File not found! properties.json");

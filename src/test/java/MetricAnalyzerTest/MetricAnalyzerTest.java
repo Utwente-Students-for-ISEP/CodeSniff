@@ -33,7 +33,6 @@ public class MetricAnalyzerTest {
     }
 
     @Test
-    @Disabled
     void testGeneratedRulesetFile() throws IOException {
         metricAnalyzer.runMetrics(codeAnalysisConfig);
 
@@ -52,7 +51,6 @@ public class MetricAnalyzerTest {
     }
 
     @Test
-    @Disabled
     void testPMDReportGeneration() throws IOException {
 
         metricAnalyzer.runMetrics(codeAnalysisConfig);

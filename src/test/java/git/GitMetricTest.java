@@ -1,24 +1,21 @@
 package git;
 
-import org.antlr.v4.runtime.misc.Pair;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
 import org.json.JSONException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.mining.util.sarifparser.JGitSarifParser;
 import org.mining.util.gitmetrics.GitMetricAnalyzer;
 import org.mining.util.gitmetrics.GitMetricAnalyzerBuilder;
 import org.mining.util.gitmetrics.GitMetricEnum;
 import org.mining.util.gitmetrics.GitMetricFactory;
 import org.mining.util.inputparser.CodeAnalysisConfig;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.*;
 
 import static org.mining.util.gitmetrics.GitMetricEnum.*;
@@ -58,6 +55,7 @@ public class GitMetricTest {
             builder.addMetric(metric);
         }
         builder.analyze(repository);
+        JGitSarifParser.parseJGit();
     }
 
     private Git getGit() throws GitAPIException {

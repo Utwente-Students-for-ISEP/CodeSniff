@@ -1,6 +1,5 @@
 package org.mining;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
@@ -8,12 +7,11 @@ import org.mining.util.LanguageMetrics.MetricAnalyzer;
 import org.mining.util.gitmetrics.*;
 import org.mining.util.inputparser.CodeAnalysisConfig;
 import org.mining.util.inputparser.ConfigParser;
-import org.mining.util.inputparser.MetricEnum;
+import org.mining.util.sarifparser.JGitSarifParser;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Map;
 
 public class GitAnalyzer {
@@ -38,6 +36,8 @@ public class GitAnalyzer {
         metricAnalyzer.runMetrics(codeAnalysisConfig);
         // Analyze metrics
         builder.analyze(repository);
+        //Generate Sarif Report
+        JGitSarifParser.parseJGit();
         //Cleanup
         git.getRepository().close();
         //deleteDirectory(dir);

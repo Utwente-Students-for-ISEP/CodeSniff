@@ -55,7 +55,6 @@ public class GitMetricTest {
             builder.addMetric(metric);
         }
         builder.analyze(repository);
-        JGitSarifParser.parseJGit();
     }
 
     private Git getGit() throws GitAPIException {

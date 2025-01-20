@@ -78,7 +78,6 @@ public class JavascriptRulesetGenerator implements ILanguageMetricGenerator{
 
             try (FileWriter writer = new FileWriter(file)) {
                 writer.write(sbBuilder.toString());
-                // MAYBE ADD SARIF OUTPUT HERE
             }
 
         } catch (IOException e) {

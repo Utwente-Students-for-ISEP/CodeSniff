@@ -1,298 +1,536 @@
 {
-  "$schema" : "https://json.schemastore.org/sarif-2.1.0.json",
-  "version" : "2.1.0",
-  "runs" : [ {
-    "tool" : {
-      "driver" : {
-        "name" : "JGit",
-        "informationUri" : "https://www.eclipse.org/jgit/",
-        "version" : "7.0.0",
-        "semanticVersion" : "7.0.0",
-        "organization" : "Eclipse Foundation"
-      }
-    },
-    "results" : [ {
-      "ruleId" : "Branch Count with Authors",
-      "message" : {
-        "text" : "See properties for detailed information."
-      },
-      "properties" : {
-        "totalBranchCount" : 2,
-        "authors" : [ {
-          "author" : "Danila",
-          "branches" : [ {
-            "branchName" : "refs/heads/main"
-          }, {
-            "branchName" : "refs/remotes/origin/main"
-          } ]
-        } ]
-      },
-      "locations" : [ {
-        "physicalLocation" : {
-          "artifactLocation" : {
-            "uri" : "dummy/file/path",
-            "uriBaseId" : "SRCROOT",
-            "index" : 0
-          },
-          "region" : {
-            "startLine" : 1,
-            "startColumn" : 1
-          }
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "PMD",
+          "version": "7.6.0",
+          "informationUri": "https://docs.pmd-code.org/latest/",
+          "rules": [
+            {
+              "id": "CognitiveComplexity",
+              "shortDescription": {
+                "text": "The method 'onNewLine()' has a cognitive complexity of 16, current threshold is 15"
+              },
+              "fullDescription": {
+                "text": "\n            Methods that are highly complex are difficult to read and more costly to maintain. If you include too much decisional\n            logic within a single method, you make its behavior hard to understand and more difficult to modify.\n\n            Cognitive complexity is a measure of how difficult it is for humans to read and understand a method. Code that contains\n            a break in the control flow is more complex, whereas the use of language shorthands doesn't increase the level of\n            complexity. Nested control flows can make a method more difficult to understand, with each additional nesting of the\n            control flow leading to an increase in cognitive complexity.\n\n            Information about Cognitive complexity can be found in the original paper here:\n            <https://www.sonarsource.com/docs/CognitiveComplexity.pdf>\n\n            By default, this rule reports methods with a complexity of 15 or more. Reported methods should be broken down into less\n            complex components.\n        "
+              },
+              "helpUri": "https://docs.pmd-code.org/pmd-doc-7.6.0/pmd_rules_java_design.html#cognitivecomplexity",
+              "help": {
+                "text": "\n            Methods that are highly complex are difficult to read and more costly to maintain. If you include too much decisional\n            logic within a single method, you make its behavior hard to understand and more difficult to modify.\n\n            Cognitive complexity is a measure of how difficult it is for humans to read and understand a method. Code that contains\n            a break in the control flow is more complex, whereas the use of language shorthands doesn't increase the level of\n            complexity. Nested control flows can make a method more difficult to understand, with each additional nesting of the\n            control flow leading to an increase in cognitive complexity.\n\n            Information about Cognitive complexity can be found in the original paper here:\n            <https://www.sonarsource.com/docs/CognitiveComplexity.pdf>\n\n            By default, this rule reports methods with a complexity of 15 or more. Reported methods should be broken down into less\n            complex components.\n        "
+              },
+              "properties": {
+                "ruleset": "Design",
+                "priority": 3,
+                "tags": [
+                  "Design"
+                ]
+              }
+            },
+            {
+              "id": "CouplingBetweenObjects",
+              "shortDescription": {
+                "text": "High amount of different objects as members denotes a high coupling"
+              },
+              "fullDescription": {
+                "text": "\nThis rule counts the number of unique attributes, local variables, and return types within an object.\nA number higher than the specified threshold can indicate a high degree of coupling.\n        "
+              },
+              "helpUri": "https://docs.pmd-code.org/pmd-doc-7.6.0/pmd_rules_java_design.html#couplingbetweenobjects",
+              "help": {
+                "text": "\nThis rule counts the number of unique attributes, local variables, and return types within an object.\nA number higher than the specified threshold can indicate a high degree of coupling.\n        "
+              },
+              "properties": {
+                "ruleset": "Design",
+                "priority": 3,
+                "tags": [
+                  "Design"
+                ]
+              }
+            },
+            {
+              "id": "CyclomaticComplexity",
+              "shortDescription": {
+                "text": "The class 'JavaParserBaseListener' has a total cyclomatic complexity of 282 (highest 1)."
+              },
+              "fullDescription": {
+                "text": "\nThe complexity of methods directly affects maintenance costs and readability. Concentrating too much decisional logic\nin a single method makes its behaviour hard to read and change.\n\nCyclomatic complexity assesses the complexity of a method by counting the number of decision points in a method,\nplus one for the method entry. Decision points are places where the control flow jumps to another place in the\nprogram. As such, they include all control flow statements, such as `if`, `while`, `for`, and `case`. For more\ndetails on the calculation, see the documentation {% jdoc java::lang.java.metrics.JavaMetrics#CYCLO %}.\n\nGenerally, numbers ranging from 1-4 denote low complexity, 5-7 denote moderate complexity, 8-10 denote\nhigh complexity, and 11+ is very high complexity. By default, this rule reports methods with a complexity >= 10.\nAdditionally, classes with many methods of moderate complexity get reported as well once the total of their\nmethods' complexities reaches 80, even if none of the methods was directly reported.\n\nReported methods should be broken down into several smaller methods. Reported classes should probably be broken down\ninto subcomponents.\n        "
+              },
+              "helpUri": "https://docs.pmd-code.org/pmd-doc-7.6.0/pmd_rules_java_design.html#cyclomaticcomplexity",
+              "help": {
+                "text": "\nThe complexity of methods directly affects maintenance costs and readability. Concentrating too much decisional logic\nin a single method makes its behaviour hard to read and change.\n\nCyclomatic complexity assesses the complexity of a method by counting the number of decision points in a method,\nplus one for the method entry. Decision points are places where the control flow jumps to another place in the\nprogram. As such, they include all control flow statements, such as `if`, `while`, `for`, and `case`. For more\ndetails on the calculation, see the documentation {% jdoc java::lang.java.metrics.JavaMetrics#CYCLO %}.\n\nGenerally, numbers ranging from 1-4 denote low complexity, 5-7 denote moderate complexity, 8-10 denote\nhigh complexity, and 11+ is very high complexity. By default, this rule reports methods with a complexity >= 10.\nAdditionally, classes with many methods of moderate complexity get reported as well once the total of their\nmethods' complexities reaches 80, even if none of the methods was directly reported.\n\nReported methods should be broken down into several smaller methods. Reported classes should probably be broken down\ninto subcomponents.\n        "
+              },
+              "properties": {
+                "ruleset": "Design",
+                "priority": 3,
+                "tags": [
+                  "Design"
+                ]
+              }
+            },
+            {
+              "id": "CyclomaticComplexity",
+              "shortDescription": {
+                "text": "The class 'JavaScriptParserBaseVisitor' has a total cyclomatic complexity of 144 (highest 1)."
+              },
+              "fullDescription": {
+                "text": "\nThe complexity of methods directly affects maintenance costs and readability. Concentrating too much decisional logic\nin a single method makes its behaviour hard to read and change.\n\nCyclomatic complexity assesses the complexity of a method by counting the number of decision points in a method,\nplus one for the method entry. Decision points are places where the control flow jumps to another place in the\nprogram. As such, they include all control flow statements, such as `if`, `while`, `for`, and `case`. For more\ndetails on the calculation, see the documentation {% jdoc java::lang.java.metrics.JavaMetrics#CYCLO %}.\n\nGenerally, numbers ranging from 1-4 denote low complexity, 5-7 denote moderate complexity, 8-10 denote\nhigh complexity, and 11+ is very high complexity. By default, this rule reports methods with a complexity >= 10.\nAdditionally, classes with many methods of moderate complexity get reported as well once the total of their\nmethods' complexities reaches 80, even if none of the methods was directly reported.\n\nReported methods should be broken down into several smaller methods. Reported classes should probably be broken down\ninto subcomponents.\n        "
+              },
+              "helpUri": "https://docs.pmd-code.org/pmd-doc-7.6.0/pmd_rules_java_design.html#cyclomaticcomplexity",
+              "help": {
+                "text": "\nThe complexity of methods directly affects maintenance costs and readability. Concentrating too much decisional logic\nin a single method makes its behaviour hard to read and change.\n\nCyclomatic complexity assesses the complexity of a method by counting the number of decision points in a method,\nplus one for the method entry. Decision points are places where the control flow jumps to another place in the\nprogram. As such, they include all control flow statements, such as `if`, `while`, `for`, and `case`. For more\ndetails on the calculation, see the documentation {% jdoc java::lang.java.metrics.JavaMetrics#CYCLO %}.\n\nGenerally, numbers ranging from 1-4 denote low complexity, 5-7 denote moderate complexity, 8-10 denote\nhigh complexity, and 11+ is very high complexity. By default, this rule reports methods with a complexity >= 10.\nAdditionally, classes with many methods of moderate complexity get reported as well once the total of their\nmethods' complexities reaches 80, even if none of the methods was directly reported.\n\nReported methods should be broken down into several smaller methods. Reported classes should probably be broken down\ninto subcomponents.\n        "
+              },
+              "properties": {
+                "ruleset": "Design",
+                "priority": 3,
+                "tags": [
+                  "Design"
+                ]
+              }
+            },
+            {
+              "id": "CyclomaticComplexity",
+              "shortDescription": {
+                "text": "The class 'JavaScriptParserBaseListener' has a total cyclomatic complexity of 292 (highest 1)."
+              },
+              "fullDescription": {
+                "text": "\nThe complexity of methods directly affects maintenance costs and readability. Concentrating too much decisional logic\nin a single method makes its behaviour hard to read and change.\n\nCyclomatic complexity assesses the complexity of a method by counting the number of decision points in a method,\nplus one for the method entry. Decision points are places where the control flow jumps to another place in the\nprogram. As such, they include all control flow statements, such as `if`, `while`, `for`, and `case`. For more\ndetails on the calculation, see the documentation {% jdoc java::lang.java.metrics.JavaMetrics#CYCLO %}.\n\nGenerally, numbers ranging from 1-4 denote low complexity, 5-7 denote moderate complexity, 8-10 denote\nhigh complexity, and 11+ is very high complexity. By default, this rule reports methods with a complexity >= 10.\nAdditionally, classes with many methods of moderate complexity get reported as well once the total of their\nmethods' complexities reaches 80, even if none of the methods was directly reported.\n\nReported methods should be broken down into several smaller methods. Reported classes should probably be broken down\ninto subcomponents.\n        "
+              },
+              "helpUri": "https://docs.pmd-code.org/pmd-doc-7.6.0/pmd_rules_java_design.html#cyclomaticcomplexity",
+              "help": {
+                "text": "\nThe complexity of methods directly affects maintenance costs and readability. Concentrating too much decisional logic\nin a single method makes its behaviour hard to read and change.\n\nCyclomatic complexity assesses the complexity of a method by counting the number of decision points in a method,\nplus one for the method entry. Decision points are places where the control flow jumps to another place in the\nprogram. As such, they include all control flow statements, such as `if`, `while`, `for`, and `case`. For more\ndetails on the calculation, see the documentation {% jdoc java::lang.java.metrics.JavaMetrics#CYCLO %}.\n\nGenerally, numbers ranging from 1-4 denote low complexity, 5-7 denote moderate complexity, 8-10 denote\nhigh complexity, and 11+ is very high complexity. By default, this rule reports methods with a complexity >= 10.\nAdditionally, classes with many methods of moderate complexity get reported as well once the total of their\nmethods' complexities reaches 80, even if none of the methods was directly reported.\n\nReported methods should be broken down into several smaller methods. Reported classes should probably be broken down\ninto subcomponents.\n        "
+              },
+              "properties": {
+                "ruleset": "Design",
+                "priority": 3,
+                "tags": [
+                  "Design"
+                ]
+              }
+            },
+            {
+              "id": "CyclomaticComplexity",
+              "shortDescription": {
+                "text": "The class 'JavaParserBaseVisitor' has a total cyclomatic complexity of 139 (highest 1)."
+              },
+              "fullDescription": {
+                "text": "\nThe complexity of methods directly affects maintenance costs and readability. Concentrating too much decisional logic\nin a single method makes its behaviour hard to read and change.\n\nCyclomatic complexity assesses the complexity of a method by counting the number of decision points in a method,\nplus one for the method entry. Decision points are places where the control flow jumps to another place in the\nprogram. As such, they include all control flow statements, such as `if`, `while`, `for`, and `case`. For more\ndetails on the calculation, see the documentation {% jdoc java::lang.java.metrics.JavaMetrics#CYCLO %}.\n\nGenerally, numbers ranging from 1-4 denote low complexity, 5-7 denote moderate complexity, 8-10 denote\nhigh complexity, and 11+ is very high complexity. By default, this rule reports methods with a complexity >= 10.\nAdditionally, classes with many methods of moderate complexity get reported as well once the total of their\nmethods' complexities reaches 80, even if none of the methods was directly reported.\n\nReported methods should be broken down into several smaller methods. Reported classes should probably be broken down\ninto subcomponents.\n        "
+              },
+              "helpUri": "https://docs.pmd-code.org/pmd-doc-7.6.0/pmd_rules_java_design.html#cyclomaticcomplexity",
+              "help": {
+                "text": "\nThe complexity of methods directly affects maintenance costs and readability. Concentrating too much decisional logic\nin a single method makes its behaviour hard to read and change.\n\nCyclomatic complexity assesses the complexity of a method by counting the number of decision points in a method,\nplus one for the method entry. Decision points are places where the control flow jumps to another place in the\nprogram. As such, they include all control flow statements, such as `if`, `while`, `for`, and `case`. For more\ndetails on the calculation, see the documentation {% jdoc java::lang.java.metrics.JavaMetrics#CYCLO %}.\n\nGenerally, numbers ranging from 1-4 denote low complexity, 5-7 denote moderate complexity, 8-10 denote\nhigh complexity, and 11+ is very high complexity. By default, this rule reports methods with a complexity >= 10.\nAdditionally, classes with many methods of moderate complexity get reported as well once the total of their\nmethods' complexities reaches 80, even if none of the methods was directly reported.\n\nReported methods should be broken down into several smaller methods. Reported classes should probably be broken down\ninto subcomponents.\n        "
+              },
+              "properties": {
+                "ruleset": "Design",
+                "priority": 3,
+                "tags": [
+                  "Design"
+                ]
+              }
+            },
+            {
+              "id": "CyclomaticComplexity",
+              "shortDescription": {
+                "text": "The class 'Python3ParserBaseVisitor' has a total cyclomatic complexity of 119 (highest 1)."
+              },
+              "fullDescription": {
+                "text": "\nThe complexity of methods directly affects maintenance costs and readability. Concentrating too much decisional logic\nin a single method makes its behaviour hard to read and change.\n\nCyclomatic complexity assesses the complexity of a method by counting the number of decision points in a method,\nplus one for the method entry. Decision points are places where the control flow jumps to another place in the\nprogram. As such, they include all control flow statements, such as `if`, `while`, `for`, and `case`. For more\ndetails on the calculation, see the documentation {% jdoc java::lang.java.metrics.JavaMetrics#CYCLO %}.\n\nGenerally, numbers ranging from 1-4 denote low complexity, 5-7 denote moderate complexity, 8-10 denote\nhigh complexity, and 11+ is very high complexity. By default, this rule reports methods with a complexity >= 10.\nAdditionally, classes with many methods of moderate complexity get reported as well once the total of their\nmethods' complexities reaches 80, even if none of the methods was directly reported.\n\nReported methods should be broken down into several smaller methods. Reported classes should probably be broken down\ninto subcomponents.\n        "
+              },
+              "helpUri": "https://docs.pmd-code.org/pmd-doc-7.6.0/pmd_rules_java_design.html#cyclomaticcomplexity",
+              "help": {
+                "text": "\nThe complexity of methods directly affects maintenance costs and readability. Concentrating too much decisional logic\nin a single method makes its behaviour hard to read and change.\n\nCyclomatic complexity assesses the complexity of a method by counting the number of decision points in a method,\nplus one for the method entry. Decision points are places where the control flow jumps to another place in the\nprogram. As such, they include all control flow statements, such as `if`, `while`, `for`, and `case`. For more\ndetails on the calculation, see the documentation {% jdoc java::lang.java.metrics.JavaMetrics#CYCLO %}.\n\nGenerally, numbers ranging from 1-4 denote low complexity, 5-7 denote moderate complexity, 8-10 denote\nhigh complexity, and 11+ is very high complexity. By default, this rule reports methods with a complexity >= 10.\nAdditionally, classes with many methods of moderate complexity get reported as well once the total of their\nmethods' complexities reaches 80, even if none of the methods was directly reported.\n\nReported methods should be broken down into several smaller methods. Reported classes should probably be broken down\ninto subcomponents.\n        "
+              },
+              "properties": {
+                "ruleset": "Design",
+                "priority": 3,
+                "tags": [
+                  "Design"
+                ]
+              }
+            },
+            {
+              "id": "CyclomaticComplexity",
+              "shortDescription": {
+                "text": "The class 'Python3ParserBaseListener' has a total cyclomatic complexity of 242 (highest 1)."
+              },
+              "fullDescription": {
+                "text": "\nThe complexity of methods directly affects maintenance costs and readability. Concentrating too much decisional logic\nin a single method makes its behaviour hard to read and change.\n\nCyclomatic complexity assesses the complexity of a method by counting the number of decision points in a method,\nplus one for the method entry. Decision points are places where the control flow jumps to another place in the\nprogram. As such, they include all control flow statements, such as `if`, `while`, `for`, and `case`. For more\ndetails on the calculation, see the documentation {% jdoc java::lang.java.metrics.JavaMetrics#CYCLO %}.\n\nGenerally, numbers ranging from 1-4 denote low complexity, 5-7 denote moderate complexity, 8-10 denote\nhigh complexity, and 11+ is very high complexity. By default, this rule reports methods with a complexity >= 10.\nAdditionally, classes with many methods of moderate complexity get reported as well once the total of their\nmethods' complexities reaches 80, even if none of the methods was directly reported.\n\nReported methods should be broken down into several smaller methods. Reported classes should probably be broken down\ninto subcomponents.\n        "
+              },
+              "helpUri": "https://docs.pmd-code.org/pmd-doc-7.6.0/pmd_rules_java_design.html#cyclomaticcomplexity",
+              "help": {
+                "text": "\nThe complexity of methods directly affects maintenance costs and readability. Concentrating too much decisional logic\nin a single method makes its behaviour hard to read and change.\n\nCyclomatic complexity assesses the complexity of a method by counting the number of decision points in a method,\nplus one for the method entry. Decision points are places where the control flow jumps to another place in the\nprogram. As such, they include all control flow statements, such as `if`, `while`, `for`, and `case`. For more\ndetails on the calculation, see the documentation {% jdoc java::lang.java.metrics.JavaMetrics#CYCLO %}.\n\nGenerally, numbers ranging from 1-4 denote low complexity, 5-7 denote moderate complexity, 8-10 denote\nhigh complexity, and 11+ is very high complexity. By default, this rule reports methods with a complexity >= 10.\nAdditionally, classes with many methods of moderate complexity get reported as well once the total of their\nmethods' complexities reaches 80, even if none of the methods was directly reported.\n\nReported methods should be broken down into several smaller methods. Reported classes should probably be broken down\ninto subcomponents.\n        "
+              },
+              "properties": {
+                "ruleset": "Design",
+                "priority": 3,
+                "tags": [
+                  "Design"
+                ]
+              }
+            },
+            {
+              "id": "NcssCount",
+              "shortDescription": {
+                "text": "The method 'parseESLint()' has a NCSS line count of 52."
+              },
+              "fullDescription": {
+                "text": "\nThis rule uses the NCSS (Non-Commenting Source Statements) metric to determine the number of lines\nof code in a class, method or constructor. NCSS ignores comments, blank lines, and only counts actual\nstatements. For more details on the calculation, see the documentation\n{% jdoc java::lang.java.metrics.JavaMetrics#NCSS %}.\n        "
+              },
+              "helpUri": "https://docs.pmd-code.org/pmd-doc-7.6.0/pmd_rules_java_design.html#ncsscount",
+              "help": {
+                "text": "\nThis rule uses the NCSS (Non-Commenting Source Statements) metric to determine the number of lines\nof code in a class, method or constructor. NCSS ignores comments, blank lines, and only counts actual\nstatements. For more details on the calculation, see the documentation\n{% jdoc java::lang.java.metrics.JavaMetrics#NCSS %}.\n        "
+              },
+              "properties": {
+                "ruleset": "Design",
+                "priority": 3,
+                "tags": [
+                  "Design"
+                ]
+              }
+            }
+          ]
         }
-      } ]
-    }, {
-      "ruleId" : "Code Ownership By File",
-      "message" : {
-        "text" : "See properties for detailed information."
       },
-      "properties" : {
-        "files" : [ {
-          "filePath" : "Javatest.java",
-          "contributors" : [ {
-            "author" : "Danila",
-            "percentage" : 100,
-            "changes" : 1
-          } ],
-          "topContributor" : {
-            "percentage" : 100,
-            "name" : "Danila"
-          }
-        }, {
-          "filePath" : "test.py",
-          "contributors" : [ {
-            "author" : "Danila",
-            "percentage" : 100,
-            "changes" : 2
-          } ],
-          "topContributor" : {
-            "percentage" : 100,
-            "name" : "Danila"
-          }
-        }, {
-          "filePath" : "jstest.js",
-          "contributors" : [ {
-            "author" : "Danila",
-            "percentage" : 100,
-            "changes" : 2
-          } ],
-          "topContributor" : {
-            "percentage" : 100,
-            "name" : "Danila"
-          }
-        } ]
-      },
-      "locations" : [ {
-        "physicalLocation" : {
-          "artifactLocation" : {
-            "uri" : "dummy/file/path",
-            "uriBaseId" : "SRCROOT",
-            "index" : 0
+      "results": [
+        {
+          "ruleId": "CognitiveComplexity",
+          "ruleIndex": 0,
+          "message": {
+            "text": "The method 'onNewLine()' has a cognitive complexity of 16, current threshold is 15"
           },
-          "region" : {
-            "startLine" : 1,
-            "startColumn" : 1
-          }
-        }
-      } ]
-    }, {
-      "ruleId" : "Commit Size",
-      "message" : {
-        "text" : "See properties for detailed information."
-      },
-      "properties" : {
-        "0" : {
-          "totalLinesAdded" : 116
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///G:/2ndYear/Q5/ISEP/source_code/CodeSniff/src/main/java/org/mining/util/gitmetrics/antlr/Python3LexerBase.java"
+                },
+                "region": {
+                  "startLine": 109,
+                  "startColumn": 10,
+                  "endLine": 109,
+                  "endColumn": 19
+                }
+              }
+            }
+          ]
         },
-        "1" : {
-          "totalLinesDeleted" : 9
-        }
-      },
-      "locations" : [ {
-        "physicalLocation" : {
-          "artifactLocation" : {
-            "uri" : "dummy/file/path",
-            "uriBaseId" : "SRCROOT",
-            "index" : 0
+        {
+          "ruleId": "CouplingBetweenObjects",
+          "ruleIndex": 1,
+          "message": {
+            "text": "High amount of different objects as members denotes a high coupling"
           },
-          "region" : {
-            "startLine" : 1,
-            "startColumn" : 1
-          }
-        }
-      } ]
-    }, {
-      "ruleId" : "CommitFixRevert",
-      "message" : {
-        "text" : "See properties for detailed information."
-      },
-      "properties" : {
-        "0" : {
-          "date" : "Wed Jan 08 12:12:30 CET 2025",
-          "author" : "Danila",
-          "commitID" : "4b1aff3ba9bee670164d6c202383b68823cb6b4b",
-          "message" : "fix revert\n"
-        }
-      },
-      "locations" : [ {
-        "physicalLocation" : {
-          "artifactLocation" : {
-            "uri" : "dummy/file/path",
-            "uriBaseId" : "SRCROOT",
-            "index" : 0
-          },
-          "region" : {
-            "startLine" : 1,
-            "startColumn" : 1
-          }
-        }
-      } ]
-    }, {
-      "ruleId" : "Commit Frequency",
-      "message" : {
-        "text" : "See properties for detailed information."
-      },
-      "properties" : {
-        "0" : {
-          "date" : "2024-12-14",
-          "commits" : 2
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///G:/2ndYear/Q5/ISEP/source_code/CodeSniff/src/main/java/org/mining/util/gitmetrics/antlr/JavaParserBaseListener.java"
+                },
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 1,
+                  "endLine": 1708,
+                  "endColumn": 2
+                }
+              }
+            }
+          ]
         },
-        "1" : {
-          "date" : "2024-12-15",
-          "commits" : 2
+        {
+          "ruleId": "CyclomaticComplexity",
+          "ruleIndex": 2,
+          "message": {
+            "text": "The class 'JavaParserBaseListener' has a total cyclomatic complexity of 282 (highest 1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///G:/2ndYear/Q5/ISEP/source_code/CodeSniff/src/main/java/org/mining/util/gitmetrics/antlr/JavaParserBaseListener.java"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 8,
+                  "endLine": 14,
+                  "endColumn": 13
+                }
+              }
+            }
+          ]
         },
-        "2" : {
-          "date" : "2025-01-08",
-          "commits" : 1
-        }
-      },
-      "locations" : [ {
-        "physicalLocation" : {
-          "artifactLocation" : {
-            "uri" : "dummy/file/path",
-            "uriBaseId" : "SRCROOT",
-            "index" : 0
+        {
+          "ruleId": "CouplingBetweenObjects",
+          "ruleIndex": 1,
+          "message": {
+            "text": "High amount of different objects as members denotes a high coupling"
           },
-          "region" : {
-            "startLine" : 1,
-            "startColumn" : 1
-          }
-        }
-      } ]
-    }, {
-      "ruleId" : "Branch Time",
-      "message" : {
-        "text" : "See properties for detailed information."
-      },
-      "properties" : {
-        "details" : "No merged branches to calculate average branch time."
-      },
-      "locations" : [ {
-        "physicalLocation" : {
-          "artifactLocation" : {
-            "uri" : "dummy/file/path",
-            "uriBaseId" : "SRCROOT",
-            "index" : 0
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///G:/2ndYear/Q5/ISEP/source_code/CodeSniff/src/main/java/org/mining/util/gitmetrics/antlr/JavaScriptParserBaseVisitor.java"
+                },
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 1,
+                  "endLine": 1023,
+                  "endColumn": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CyclomaticComplexity",
+          "ruleIndex": 3,
+          "message": {
+            "text": "The class 'JavaScriptParserBaseVisitor' has a total cyclomatic complexity of 144 (highest 1)."
           },
-          "region" : {
-            "startLine" : 1,
-            "startColumn" : 1
-          }
-        }
-      } ]
-    }, {
-      "ruleId" : "Code Churn",
-      "message" : {
-        "text" : "See properties for detailed information."
-      },
-      "properties" : {
-        "files" : [ {
-          "filePath" : "test.py",
-          "methods" : [ {
-            "methodName" : "get_task_count(self)",
-            "modifications" : 2
-          }, {
-            "methodName" : "main()",
-            "modifications" : 2
-          }, {
-            "methodName" : "__init__(self)",
-            "modifications" : 2
-          }, {
-            "methodName" : "remove_task(self, task, v)",
-            "modifications" : 2
-          }, {
-            "methodName" : "mark_doe(self, task)",
-            "modifications" : 1
-          }, {
-            "methodName" : "show_tasks(self)",
-            "modifications" : 2
-          }, {
-            "methodName" : "add_task(self, task, v)",
-            "modifications" : 2
-          }, {
-            "methodName" : "mark_done(self, task)",
-            "modifications" : 1
-          } ]
-        }, {
-          "filePath" : "Javatest.java",
-          "methods" : [ {
-            "methodName" : "void setEmail(String email)",
-            "modifications" : 1
-          }, {
-            "methodName" : "void setName(String name)",
-            "modifications" : 1
-          }, {
-            "methodName" : "String getName()",
-            "modifications" : 1
-          }, {
-            "methodName" : "String getEmail()",
-            "modifications" : 1
-          } ]
-        }, {
-          "filePath" : "jstest.js",
-          "methods" : [ {
-            "methodName" : "showTasks()",
-            "modifications" : 2
-          }, {
-            "methodName" : "arrow_function",
-            "modifications" : 2
-          }, {
-            "methodName" : "getTaskCount()",
-            "modifications" : 2
-          }, {
-            "methodName" : "markDone(task)",
-            "modifications" : 2
-          }, {
-            "methodName" : "constructor()",
-            "modifications" : 2
-          }, {
-            "methodName" : "addTask(task)",
-            "modifications" : 2
-          }, {
-            "methodName" : "removeTask(task)",
-            "modifications" : 2
-          } ]
-        } ]
-      },
-      "locations" : [ {
-        "physicalLocation" : {
-          "artifactLocation" : {
-            "uri" : "dummy/file/path",
-            "uriBaseId" : "SRCROOT",
-            "index" : 0
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///G:/2ndYear/Q5/ISEP/source_code/CodeSniff/src/main/java/org/mining/util/gitmetrics/antlr/JavaScriptParserBaseVisitor.java"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 8,
+                  "endLine": 14,
+                  "endColumn": 13
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CouplingBetweenObjects",
+          "ruleIndex": 1,
+          "message": {
+            "text": "High amount of different objects as members denotes a high coupling"
           },
-          "region" : {
-            "startLine" : 1,
-            "startColumn" : 1
-          }
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///G:/2ndYear/Q5/ISEP/source_code/CodeSniff/src/main/java/org/mining/util/gitmetrics/antlr/JavaScriptParserBaseListener.java"
+                },
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 1,
+                  "endLine": 1768,
+                  "endColumn": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CyclomaticComplexity",
+          "ruleIndex": 4,
+          "message": {
+            "text": "The class 'JavaScriptParserBaseListener' has a total cyclomatic complexity of 292 (highest 1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///G:/2ndYear/Q5/ISEP/source_code/CodeSniff/src/main/java/org/mining/util/gitmetrics/antlr/JavaScriptParserBaseListener.java"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 8,
+                  "endLine": 14,
+                  "endColumn": 13
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CouplingBetweenObjects",
+          "ruleIndex": 1,
+          "message": {
+            "text": "High amount of different objects as members denotes a high coupling"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///G:/2ndYear/Q5/ISEP/source_code/CodeSniff/src/main/java/org/mining/util/gitmetrics/antlr/JavaParserBaseVisitor.java"
+                },
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 1,
+                  "endLine": 988,
+                  "endColumn": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CyclomaticComplexity",
+          "ruleIndex": 5,
+          "message": {
+            "text": "The class 'JavaParserBaseVisitor' has a total cyclomatic complexity of 139 (highest 1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///G:/2ndYear/Q5/ISEP/source_code/CodeSniff/src/main/java/org/mining/util/gitmetrics/antlr/JavaParserBaseVisitor.java"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 8,
+                  "endLine": 14,
+                  "endColumn": 13
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CouplingBetweenObjects",
+          "ruleIndex": 1,
+          "message": {
+            "text": "High amount of different objects as members denotes a high coupling"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///G:/2ndYear/Q5/ISEP/source_code/CodeSniff/src/main/java/org/mining/util/gitmetrics/antlr/Python3ParserBaseVisitor.java"
+                },
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 1,
+                  "endLine": 848,
+                  "endColumn": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CyclomaticComplexity",
+          "ruleIndex": 6,
+          "message": {
+            "text": "The class 'Python3ParserBaseVisitor' has a total cyclomatic complexity of 119 (highest 1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///G:/2ndYear/Q5/ISEP/source_code/CodeSniff/src/main/java/org/mining/util/gitmetrics/antlr/Python3ParserBaseVisitor.java"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 8,
+                  "endLine": 14,
+                  "endColumn": 13
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CouplingBetweenObjects",
+          "ruleIndex": 1,
+          "message": {
+            "text": "High amount of different objects as members denotes a high coupling"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///G:/2ndYear/Q5/ISEP/source_code/CodeSniff/src/main/java/org/mining/util/gitmetrics/antlr/Python3ParserBaseListener.java"
+                },
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 1,
+                  "endLine": 1468,
+                  "endColumn": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CyclomaticComplexity",
+          "ruleIndex": 7,
+          "message": {
+            "text": "The class 'Python3ParserBaseListener' has a total cyclomatic complexity of 242 (highest 1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///G:/2ndYear/Q5/ISEP/source_code/CodeSniff/src/main/java/org/mining/util/gitmetrics/antlr/Python3ParserBaseListener.java"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 8,
+                  "endLine": 14,
+                  "endColumn": 13
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "NcssCount",
+          "ruleIndex": 8,
+          "message": {
+            "text": "The method 'parseESLint()' has a NCSS line count of 52."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///G:/2ndYear/Q5/ISEP/source_code/CodeSniff/src/main/java/org/mining/util/sarifparser/ESLintSarifParser.java"
+                },
+                "region": {
+                  "startLine": 10,
+                  "startColumn": 24,
+                  "endLine": 10,
+                  "endColumn": 35
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CouplingBetweenObjects",
+          "ruleIndex": 1,
+          "message": {
+            "text": "High amount of different objects as members denotes a high coupling"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///G:/2ndYear/Q5/ISEP/source_code/CodeSniff/src/main/java/org/mining/util/sarifparser/JGitSarifParser.java"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 193,
+                  "endColumn": 3
+                }
+              }
+            }
+          ]
         }
-      } ]
-    } ],
-    "artifacts" : [ {
-      "location" : {
-        "uri" : "dummy/file/path",
-        "uriBaseId" : "SRCROOT"
-      }
-    } ],
-    "properties" : { }
-  } ]
+      ],
+      "invocations": [
+        {
+          "executionSuccessful": true,
+          "toolConfigurationNotifications": [],
+          "toolExecutionNotifications": []
+        }
+      ]
+    }
+  ]
 }

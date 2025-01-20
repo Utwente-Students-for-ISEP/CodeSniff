@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 import static org.junit.jupiter.api.Assertions.*;
 public class MetricAnalyzerTest {
     private static final String EXPECTED_RULESET_FILE_PATH = "src/test/resources/javaPMDRuleset_pattern.xml";
-    private static final String GENERATED_RULESET_FILE_PATH = "src/test/resources/javaPMDRuleset.xml";
+    private static final String GENERATED_RULESET_FILE_PATH = "src/main/resources/javaPMDRuleset.xml";
 
     private MetricAnalyzer metricAnalyzer;
     private CodeAnalysisConfig codeAnalysisConfig;

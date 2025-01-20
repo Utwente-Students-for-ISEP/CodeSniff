@@ -14,7 +14,11 @@ import java.util.Properties;
 
 public class JavaParserStrategy implements ILanguageParserStrategy {
     private static String rulesetFilePath;
+<<<<<<< HEAD
     private static final String reportPath = "src/main/resources/Final.sarif";
+=======
+    private static final String reportPath = "src/main/resources/PMDreport.sarif";
+>>>>>>> main
 
     static {
         try (InputStream input = new FileInputStream("src/main/config.properties")) {

@@ -36,8 +36,6 @@ public class GitAnalyzer {
         metricAnalyzer.runMetrics(codeAnalysisConfig);
         // Analyze metrics
         builder.analyze(repository);
-        //Generate Sarif Report
-        JGitSarifParser.parseJGit();
         //Cleanup
         git.getRepository().close();
         //deleteDirectory(dir);

@@ -1,5 +1,7 @@
 package org.mining.util.LanguageMetrics.LanguageParsingStartegies;
 
+import org.mining.util.sarifparser.ESLintSarifParser;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -43,6 +45,7 @@ public class JavascriptParserStrategy implements ILanguageParserStrategy{
             runEslintDocker(sourceDir);
             copyResultFromDocker();
             cleanUpDocker();
+            ESLintSarifParser.parseESLint();
         }
         catch (Exception e){
             e.printStackTrace();

@@ -77,11 +77,11 @@ class GitAnalyzerTest {
                 "eslint_report.txt");
         assertTrue(jsReport.exists());
 
-        File javaReport = new File(currentDirectory + File.separator + "src" + File.separator +
+        File sarifReport = new File(currentDirectory + File.separator + "src" + File.separator +
                 "test" + File.separator + "resources" + File.separator +
-                "PMDreport.sarif");
+                "Final.sarif");
+        assertTrue(sarifReport.exists());
 
-        assertTrue(javaReport.exists());
     }
 
 }

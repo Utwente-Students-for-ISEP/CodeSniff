@@ -5,6 +5,7 @@ import org.eclipse.jgit.lib.Repository;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.mining.util.sarifparser.JGitSarifParser;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -40,6 +41,7 @@ public class GitMetricAnalyzerBuilder {
             writer.write(res.toString(4));
         }
         System.out.println("Analysis results written to: " + file.getAbsolutePath());
+        JGitSarifParser.parseJGit();
     }
 }
 

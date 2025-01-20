@@ -76,7 +76,7 @@ public class ESLintSarifParser {
 
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(outputSarifFilePath), sarifNode);
 
-            System.out.println("Converted JSON to SARIF format successfully!");
+            System.out.println("SARIF file created successfully!");
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error during conversion: " + e.getMessage());

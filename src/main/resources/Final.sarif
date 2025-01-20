@@ -41,6 +41,112 @@
         }
       } ]
     }, {
+      "ruleId" : "Code Ownership By File",
+      "message" : {
+        "text" : "See properties for detailed information."
+      },
+      "properties" : {
+        "files" : [ {
+          "filePath" : "Javatest.java",
+          "contributors" : [ {
+            "author" : "Danila",
+            "percentage" : 100,
+            "changes" : 1
+          } ],
+          "topContributor" : {
+            "percentage" : 100,
+            "name" : "Danila"
+          }
+        }, {
+          "filePath" : "test.py",
+          "contributors" : [ {
+            "author" : "Danila",
+            "percentage" : 100,
+            "changes" : 2
+          } ],
+          "topContributor" : {
+            "percentage" : 100,
+            "name" : "Danila"
+          }
+        }, {
+          "filePath" : "jstest.js",
+          "contributors" : [ {
+            "author" : "Danila",
+            "percentage" : 100,
+            "changes" : 2
+          } ],
+          "topContributor" : {
+            "percentage" : 100,
+            "name" : "Danila"
+          }
+        } ]
+      },
+      "locations" : [ {
+        "physicalLocation" : {
+          "artifactLocation" : {
+            "uri" : "dummy/file/path",
+            "uriBaseId" : "SRCROOT",
+            "index" : 0
+          },
+          "region" : {
+            "startLine" : 1,
+            "startColumn" : 1
+          }
+        }
+      } ]
+    }, {
+      "ruleId" : "Commit Size",
+      "message" : {
+        "text" : "See properties for detailed information."
+      },
+      "properties" : {
+        "0" : {
+          "totalLinesAdded" : 116
+        },
+        "1" : {
+          "totalLinesDeleted" : 9
+        }
+      },
+      "locations" : [ {
+        "physicalLocation" : {
+          "artifactLocation" : {
+            "uri" : "dummy/file/path",
+            "uriBaseId" : "SRCROOT",
+            "index" : 0
+          },
+          "region" : {
+            "startLine" : 1,
+            "startColumn" : 1
+          }
+        }
+      } ]
+    }, {
+      "ruleId" : "CommitFixRevert",
+      "message" : {
+        "text" : "See properties for detailed information."
+      },
+      "properties" : {
+        "0" : {
+          "date" : "Wed Jan 08 12:12:30 CET 2025",
+          "author" : "Danila",
+          "commitID" : "4b1aff3ba9bee670164d6c202383b68823cb6b4b",
+          "message" : "fix revert\n"
+        }
+      },
+      "locations" : [ {
+        "physicalLocation" : {
+          "artifactLocation" : {
+            "uri" : "dummy/file/path",
+            "uriBaseId" : "SRCROOT",
+            "index" : 0
+          },
+          "region" : {
+            "startLine" : 1,
+            "startColumn" : 1
+          }
+        }
+      } ]
+    }, {
       "ruleId" : "Commit Frequency",
       "message" : {
         "text" : "See properties for detailed information."
@@ -73,17 +179,12 @@
         }
       } ]
     }, {
-      "ruleId" : "Commit Size",
+      "ruleId" : "Branch Time",
       "message" : {
         "text" : "See properties for detailed information."
       },
       "properties" : {
-        "0" : {
-          "totalLinesAdded" : 116
-        },
-        "1" : {
-          "totalLinesDeleted" : 9
-        }
+        "details" : "No merged branches to calculate average branch time."
       },
       "locations" : [ {
         "physicalLocation" : {
@@ -171,107 +272,6 @@
             "modifications" : 2
           } ]
         } ]
-      },
-      "locations" : [ {
-        "physicalLocation" : {
-          "artifactLocation" : {
-            "uri" : "dummy/file/path",
-            "uriBaseId" : "SRCROOT",
-            "index" : 0
-          },
-          "region" : {
-            "startLine" : 1,
-            "startColumn" : 1
-          }
-        }
-      } ]
-    }, {
-      "ruleId" : "Branch Time",
-      "message" : {
-        "text" : "See properties for detailed information."
-      },
-      "properties" : {
-        "details" : "No merged branches to calculate average branch time."
-      },
-      "locations" : [ {
-        "physicalLocation" : {
-          "artifactLocation" : {
-            "uri" : "dummy/file/path",
-            "uriBaseId" : "SRCROOT",
-            "index" : 0
-          },
-          "region" : {
-            "startLine" : 1,
-            "startColumn" : 1
-          }
-        }
-      } ]
-    }, {
-      "ruleId" : "Code Ownership By File",
-      "message" : {
-        "text" : "See properties for detailed information."
-      },
-      "properties" : {
-        "files" : [ {
-          "filePath" : "Javatest.java",
-          "contributors" : [ {
-            "author" : "Danila",
-            "percentage" : 100,
-            "changes" : 1
-          } ],
-          "topContributor" : {
-            "percentage" : 100,
-            "name" : "Danila"
-          }
-        }, {
-          "filePath" : "test.py",
-          "contributors" : [ {
-            "author" : "Danila",
-            "percentage" : 100,
-            "changes" : 2
-          } ],
-          "topContributor" : {
-            "percentage" : 100,
-            "name" : "Danila"
-          }
-        }, {
-          "filePath" : "jstest.js",
-          "contributors" : [ {
-            "author" : "Danila",
-            "percentage" : 100,
-            "changes" : 2
-          } ],
-          "topContributor" : {
-            "percentage" : 100,
-            "name" : "Danila"
-          }
-        } ]
-      },
-      "locations" : [ {
-        "physicalLocation" : {
-          "artifactLocation" : {
-            "uri" : "dummy/file/path",
-            "uriBaseId" : "SRCROOT",
-            "index" : 0
-          },
-          "region" : {
-            "startLine" : 1,
-            "startColumn" : 1
-          }
-        }
-      } ]
-    }, {
-      "ruleId" : "CommitFixRevert",
-      "message" : {
-        "text" : "See properties for detailed information."
-      },
-      "properties" : {
-        "0" : {
-          "date" : "Wed Jan 08 12:12:30 CET 2025",
-          "author" : "Danila",
-          "commitID" : "4b1aff3ba9bee670164d6c202383b68823cb6b4b",
-          "message" : "fix revert\n"
-        }
       },
       "locations" : [ {
         "physicalLocation" : {

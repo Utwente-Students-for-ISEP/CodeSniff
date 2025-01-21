@@ -79,7 +79,7 @@ class AnalyzerTest {
         assertTrue(jsReport.exists());
         SarifMerger.mergeSarif();
         File sarifReport = new File(currentDirectory + File.separator + "src" + File.separator +
-                "test" + File.separator + "resources" + File.separator +
+                "main" + File.separator + "resources" + File.separator +
                 "Final.sarif");
         assertTrue(sarifReport.exists());
 

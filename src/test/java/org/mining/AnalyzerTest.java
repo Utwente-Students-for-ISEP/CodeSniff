@@ -14,7 +14,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GitAnalyzerTest {
+class AnalyzerTest {
     @Test
     void testDeleteDirectory() {
         // Create a nested directory structure
@@ -34,7 +34,7 @@ class GitAnalyzerTest {
         assertTrue(dir.exists());
 
         // Delete the directory
-        GitAnalyzer.deleteDirectory(dir);
+        Analyzer.deleteDirectory(dir);
 
         // Verify deletion
         assertFalse(dir.exists());
@@ -43,12 +43,12 @@ class GitAnalyzerTest {
     @Test
     void testGetConfig() throws IOException {
         // Ensure the properties.json file exists in the correct location
-        String resourcePath = GitAnalyzer.class.getClassLoader().getResource("properties.json").getPath();
+        String resourcePath = Analyzer.class.getClassLoader().getResource("properties.json").getPath();
         assertNotNull(resourcePath);
 
         // Call getConfig and verify the parsed config is not null
-        GitAnalyzer.getConfig();
-        assertNotNull(GitAnalyzer.codeAnalysisConfig);
+        Analyzer.getConfig();
+        assertNotNull(Analyzer.codeAnalysisConfig);
     }
 
     @Test

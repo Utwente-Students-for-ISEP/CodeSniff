@@ -1,24 +1,27 @@
 package org.mining;
 
 import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Repository;
 import org.mining.util.LanguageMetrics.MetricAnalyzer;
-import org.mining.util.gitmetrics.*;
+import org.mining.util.gitmetrics.GitMetricAnalyzer;
+import org.mining.util.gitmetrics.GitMetricAnalyzerBuilder;
+import org.mining.util.gitmetrics.GitMetricEnum;
+import org.mining.util.gitmetrics.GitMetricFactory;
 import org.mining.util.inputparser.CodeAnalysisConfig;
 import org.mining.util.inputparser.ConfigParser;
+
 import org.mining.util.sarifparser.JGitSarifParser;
 import org.mining.util.sarifparser.SarifMerger;
+
+
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
-public class GitAnalyzer {
+public class Analyzer {
 
-    private static String url;
-    private static String dir_url;
     static CodeAnalysisConfig codeAnalysisConfig;
 
     public static void main(String[] args) throws Exception {
@@ -43,13 +46,6 @@ public class GitAnalyzer {
         //deleteDirectory(dir);
     }
 
-    private static Git getGit() throws GitAPIException {
-        return Git.cloneRepository()
-                .setURI(url)
-                .setDirectory(new File(dir_url))
-                .call();
-    }
-
     static void deleteDirectory(File directory) {
         if (directory.isDirectory()) {
             File[] files = directory.listFiles();
@@ -66,7 +62,7 @@ public class GitAnalyzer {
     }
 
     static void getConfig() throws IOException {
-        InputStream input = GitAnalyzer.class.getClassLoader().getResourceAsStream("properties.json");
+        InputStream input = Analyzer.class.getClassLoader().getResourceAsStream("properties.json");
         if (input == null) {
             throw new IllegalArgumentException("File not found! properties.json");
         }

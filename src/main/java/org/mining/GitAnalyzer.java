@@ -8,6 +8,7 @@ import org.mining.util.gitmetrics.*;
 import org.mining.util.inputparser.CodeAnalysisConfig;
 import org.mining.util.inputparser.ConfigParser;
 import org.mining.util.sarifparser.JGitSarifParser;
+import org.mining.util.sarifparser.SarifMerger;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,6 +38,7 @@ public class GitAnalyzer {
         // Analyze metrics
         builder.analyze(repository);
         //Cleanup
+        SarifMerger.mergeSarif();
         git.getRepository().close();
         //deleteDirectory(dir);
     }

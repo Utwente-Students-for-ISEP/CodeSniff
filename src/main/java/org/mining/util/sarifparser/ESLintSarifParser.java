@@ -9,7 +9,7 @@ import java.io.IOException;
 public class ESLintSarifParser {
     public static void parseESLint() {
         String inputJsonFilePath = "src/main/resources/eslint_report.txt";
-        String outputSarifFilePath = "src/main/resources/Final.sarif";
+        String outputSarifFilePath = "src/main/resources/eslint_sarif.sarif";
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();

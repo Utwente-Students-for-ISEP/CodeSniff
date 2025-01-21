@@ -6,7 +6,7 @@ import java.util.*;
 
 public class JGitSarifParser {
     private static final String inputPath = "src/main/resources/analysis_results.json";
-    private static final String outputPath = "src/main/resources/Final.sarif";
+    private static final String outputPath = "src/main/resources/jgit_sarif.sarif";
 
     public static class AnalysisResults {
         public List<Metric> metrics;
@@ -184,7 +184,7 @@ public class JGitSarifParser {
             SarifOutput sarifOutput = SarifConverter.convertToSarif(analysisResults, false);
 
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(outputPath), sarifOutput);
-            System.out.println("SARIF file created successfully!");
+            System.out.println("JGit SARIF file created successfully!");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -77,11 +77,16 @@ class AnalyzerTest {
                 "main" + File.separator + "resources" + File.separator +
                 "eslint_report.txt");
         assertTrue(jsReport.exists());
+        File javaReport = new File(currentDirectory + File.separator + "src" + File.separator +
+                "main" + File.separator + "resources" + File.separator +
+                "java_sarif.sarif");
+        assertTrue(javaReport.exists());
         SarifMerger.mergeSarif();
         File sarifReport = new File(currentDirectory + File.separator + "src" + File.separator +
                 "main" + File.separator + "resources" + File.separator +
                 "Final.sarif");
         assertTrue(sarifReport.exists());
+
 
     }
 

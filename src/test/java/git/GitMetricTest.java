@@ -13,6 +13,7 @@ import org.mining.util.gitmetrics.GitMetricAnalyzerBuilder;
 import org.mining.util.gitmetrics.GitMetricEnum;
 import org.mining.util.gitmetrics.GitMetricFactory;
 import org.mining.util.inputparser.CodeAnalysisConfig;
+import org.mining.util.sarifparser.SarifMerger;
 
 import java.io.File;
 import java.io.IOException;
@@ -168,5 +169,6 @@ public class GitMetricTest {
 
         // Analyze all metrics
         analyze(metrics);
+        SarifMerger.mergeSarif();
         }
 }

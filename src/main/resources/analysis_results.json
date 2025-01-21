@@ -13,63 +13,6 @@
         }
     },
     {
-        "metricName": "Code Ownership By File",
-        "result": {"files": [
-            {
-                "filePath": "Javatest.java",
-                "contributors": [{
-                    "author": "Danila",
-                    "percentage": 100,
-                    "changes": 1
-                }],
-                "topContributor": {
-                    "percentage": 100,
-                    "name": "Danila"
-                }
-            },
-            {
-                "filePath": "test.py",
-                "contributors": [{
-                    "author": "Danila",
-                    "percentage": 100,
-                    "changes": 2
-                }],
-                "topContributor": {
-                    "percentage": 100,
-                    "name": "Danila"
-                }
-            },
-            {
-                "filePath": "jstest.js",
-                "contributors": [{
-                    "author": "Danila",
-                    "percentage": 100,
-                    "changes": 2
-                }],
-                "topContributor": {
-                    "percentage": 100,
-                    "name": "Danila"
-                }
-            }
-        ]}
-    },
-    {
-        "metricName": "Commit Size",
-        "result": [
-            {"totalLinesAdded": 116},
-            {"totalLinesDeleted": 9}
-        ]
-    },
-    {
-        "metricName": "CommitFixRevert",
-        "result": [{
-            "date": "Wed Jan 08 12:12:30 CET 2025",
-            "author": "Danila",
-            "commitID": "4b1aff3ba9bee670164d6c202383b68823cb6b4b",
-            "message": "fix revert\n"
-        }]
-    },
-    {
         "metricName": "Commit Frequency",
         "result": [
             {
@@ -87,8 +30,11 @@
         ]
     },
     {
-        "metricName": "Branch Time",
-        "result": "No merged branches to calculate average branch time."
+        "metricName": "Commit Size",
+        "result": [
+            {"totalLinesAdded": 116},
+            {"totalLinesDeleted": 9}
+        ]
     },
     {
         "metricName": "Code Churn",
@@ -185,5 +131,59 @@
                 ]
             }
         ]}
+    },
+    {
+        "metricName": "Branch Time",
+        "result": "No merged branches to calculate average branch time."
+    },
+    {
+        "metricName": "Code Ownership By File",
+        "result": {"files": [
+            {
+                "filePath": "Javatest.java",
+                "contributors": [{
+                    "author": "Danila",
+                    "percentage": 100,
+                    "changes": 1
+                }],
+                "topContributor": {
+                    "percentage": 100,
+                    "name": "Danila"
+                }
+            },
+            {
+                "filePath": "test.py",
+                "contributors": [{
+                    "author": "Danila",
+                    "percentage": 100,
+                    "changes": 2
+                }],
+                "topContributor": {
+                    "percentage": 100,
+                    "name": "Danila"
+                }
+            },
+            {
+                "filePath": "jstest.js",
+                "contributors": [{
+                    "author": "Danila",
+                    "percentage": 100,
+                    "changes": 2
+                }],
+                "topContributor": {
+                    "percentage": 100,
+                    "name": "Danila"
+                }
+            }
+        ]}
+    },
+    {
+        "metricName": "CommitFixRevert",
+        "result": [{
+            "date": "Wed Jan 08 12:12:30 CET 2025",
+            "author": "Danila",
+            "commitID": "4b1aff3ba9bee670164d6c202383b68823cb6b4b",
+            "message": "fix revert\n"
+        }]
     }
 ]}

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class SarifMerger {
 
-    public static void startMerge(List<String> filePaths, String outputPath) {
+    public static void startSarifMerge(List<String> filePaths, String outputPath) {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode mergedSarif = objectMapper.createObjectNode();
 
@@ -22,9 +22,10 @@ public class SarifMerger {
         ArrayNode mergedRuns = objectMapper.createArrayNode();
 
         for (String filePath : filePaths) {
+            System.out.println("Processing file: " + filePath);
             File file = new File(filePath);
             if (!file.exists() || !file.isFile()) {
-                System.err.println("File does not exist or is not a valid file: " + filePath);
+                System.err.println("Warning: File does not exist or is not a valid file: " + filePath);
                 continue;
             }
             try {
@@ -33,7 +34,7 @@ public class SarifMerger {
                     ArrayNode runs = (ArrayNode) sarifContent.get("runs");
                     mergedRuns.addAll(runs);
                 } else {
-                    System.err.println("File does not contain a valid 'runs' array: " + filePath);
+                    System.err.println("Warning: File does not contain a valid 'runs' array: " + filePath);
                 }
             } catch (IOException e) {
                 System.err.println("Error reading or parsing SARIF file: " + filePath);
@@ -41,16 +42,18 @@ public class SarifMerger {
             }
         }
 
+        System.out.println("Merged runs size: " + mergedRuns.size());
         if (mergedRuns.isEmpty()) {
-            System.err.println("No valid SARIF runs found. Merged file will be empty.");
+            System.err.println("No valid SARIF runs found. Merged file will not be created.");
+            return;
         }
 
         mergedSarif.set("runs", mergedRuns);
 
         try {
-            // Write the merged SARIF to the output file
+            System.out.println("Writing merged SARIF file to: " + outputPath);
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(outputPath), mergedSarif);
-            System.out.println("Merged SARIF file created: " + outputPath);
+            System.out.println("Merged SARIF file created successfully: " + outputPath);
         } catch (IOException e) {
             System.err.println("Error writing merged SARIF file: " + outputPath);
             e.printStackTrace();
@@ -60,9 +63,17 @@ public class SarifMerger {
     public static void mergeSarif() {
         try {
             // Example usage
-            List<String> sarifFiles = List.of("src/main/resources/java_sarif.sarif", "src/main/resources/eslint_sarif.sarif", "src/main/resources/jgit_sarif.sarif");
-            String outputFile = "Final.sarif";
-            startMerge(sarifFiles, outputFile);
+            List<String> sarifFiles = List.of("src/main/resources/jgit_sarif.sarif", "src/main/resources/java_sarif.sarif", "src/main/resources/eslint_sarif.sarif");
+            String outputFile = "src/main/resources/Final.sarif";
+            startSarifMerge(sarifFiles, outputFile);
+            /*
+            for(String filepath : sarifFiles){
+                File file = new File(filepath);
+                if (file.exists() || file.isFile()) {
+                    file.delete();
+                }
+            }
+            */
         } catch (Exception e) {
             System.err.println("An unexpected error occurred: " + e.getMessage());
             e.printStackTrace();

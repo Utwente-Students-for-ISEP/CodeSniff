@@ -48,7 +48,7 @@ class AnalyzerTest {
         assertNotNull(resourcePath);
 
         // Call getConfig and verify the parsed config is not null
-        Analyzer.getConfig();
+        Analyzer.getConfig(null);
         assertNotNull(Analyzer.codeAnalysisConfig);
     }
 

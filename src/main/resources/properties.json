@@ -1,5 +1,5 @@
 {
-  "repositoryPath": "",
+  "repositoryPath": "C:\\Users\\baran\\IdeaProjects\\spring-framework",
   "metrics": {
     "CyclomaticComplexity": {
       "maxCyclomaticComplexity": 100
@@ -8,7 +8,6 @@
       "maxDependencies": 20
     },
     "LinesOfCode": {
-      "maxMethodLength": 50,
       "classSizeThreshold": 1000
     },
     "MethodLength": {

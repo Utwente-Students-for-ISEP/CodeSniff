@@ -9,13 +9,11 @@ import org.mining.util.gitmetrics.GitMetricEnum;
 import org.mining.util.gitmetrics.GitMetricFactory;
 import org.mining.util.inputparser.CodeAnalysisConfig;
 import org.mining.util.inputparser.ConfigParser;
-
 import org.mining.util.sarifparser.JGitSarifParser;
 import org.mining.util.sarifparser.SarifMerger;
 
-
-
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -25,9 +23,10 @@ public class Analyzer {
     static CodeAnalysisConfig codeAnalysisConfig;
 
     public static void main(String[] args) throws Exception {
-        getConfig();
+        getConfig(args);
         Git git = Git.open(new File(codeAnalysisConfig.getRepositoryPath()));
         Repository repository = git.getRepository();
+
         // Build metric analysis chain
         GitMetricAnalyzerBuilder builder = new GitMetricAnalyzerBuilder();
         for (Map.Entry<GitMetricEnum, CodeAnalysisConfig.MetricConfig> entry : codeAnalysisConfig.getGitMetrics().entrySet()) {
@@ -36,14 +35,16 @@ public class Analyzer {
                 builder.addMetric(metric);
             }
         }
+
         MetricAnalyzer metricAnalyzer = new MetricAnalyzer();
         metricAnalyzer.runMetrics(codeAnalysisConfig);
+
         // Analyze metrics
         builder.analyze(repository);
-        //Cleanup
+
+        // Cleanup
         SarifMerger.mergeSarif();
         git.getRepository().close();
-        //deleteDirectory(dir);
     }
 
     static void deleteDirectory(File directory) {
@@ -61,12 +62,22 @@ public class Analyzer {
         }
     }
 
-    static void getConfig() throws IOException {
-        InputStream input = Analyzer.class.getClassLoader().getResourceAsStream("properties.json");
-        if (input == null) {
-            throw new IllegalArgumentException("File not found! properties.json");
+    static void getConfig(String[] args) throws IOException {
+        InputStream input;
+        if (args != null && args.length > 0 && args[0] != null && !args[0].isEmpty()) {
+            File configFile = new File(args[0]);
+            if (!configFile.exists() || !configFile.isFile()) {
+                throw new IllegalArgumentException("Config file not found at: " + args[0]);
+            }
+            input = new FileInputStream(configFile);
+        } else {
+            input = Analyzer.class.getClassLoader().getResourceAsStream("properties.json");
+            if (input == null) {
+                throw new IllegalArgumentException("Default config file not found! properties.json");
+            }
         }
 
         codeAnalysisConfig = ConfigParser.parseConfig(input);
+        input.close();
     }
 }

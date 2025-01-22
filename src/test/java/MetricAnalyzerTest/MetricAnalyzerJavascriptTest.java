@@ -43,6 +43,12 @@ public class MetricAnalyzerJavascriptTest {
         assertTrue(generatedFile.exists(), "Generated ruleset file does not exist");
     }
     @Test
+    void testSarifReportGeneration() throws IOException {
+        metricAnalyzer.runMetrics(codeAnalysisConfig);
+        File generatedFile = new File("src/main/resources/Final.sarif");
+        assertTrue(generatedFile.exists(), "Generated ruleset file does not exist");
+    }
+    @Test
     void testReportCorrect() throws IOException {
         metricAnalyzer.runMetrics(codeAnalysisConfig);
         File generatedFile = new File("src/main/resources/eslint_report.txt");

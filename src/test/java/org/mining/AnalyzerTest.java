@@ -5,6 +5,7 @@ import org.mining.util.LanguageMetrics.MetricAnalyzer;
 import org.mining.util.inputparser.CodeAnalysisConfig;
 import org.mining.util.inputparser.ConfigParser;
 import org.mining.util.inputparser.SupportedLanguages;
+import org.mining.util.sarifparser.SarifMerger;
 
 import java.io.File;
 import java.io.IOException;
@@ -76,12 +77,17 @@ class AnalyzerTest {
                 "main" + File.separator + "resources" + File.separator +
                 "eslint_report.txt");
         assertTrue(jsReport.exists());
-
         File javaReport = new File(currentDirectory + File.separator + "src" + File.separator +
-                "test" + File.separator + "resources" + File.separator +
-                "PMDreport.sarif");
-
+                "main" + File.separator + "resources" + File.separator +
+                "java_sarif.sarif");
         assertTrue(javaReport.exists());
+        SarifMerger.mergeSarif();
+        File sarifReport = new File(currentDirectory + File.separator + "src" + File.separator +
+                "main" + File.separator + "resources" + File.separator +
+                "Final.sarif");
+        assertTrue(sarifReport.exists());
+
+
     }
 
 }

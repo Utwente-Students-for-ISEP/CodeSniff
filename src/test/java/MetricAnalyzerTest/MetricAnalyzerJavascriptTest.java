@@ -7,6 +7,7 @@ import org.mining.util.LanguageMetrics.MetricAnalyzer;
 import org.mining.util.inputparser.CodeAnalysisConfig;
 import org.mining.util.inputparser.ConfigParser;
 import org.mining.util.inputparser.MetricEnum;
+import org.mining.util.sarifparser.SarifMerger;
 
 import java.io.*;
 import java.util.HashMap;
@@ -45,8 +46,11 @@ public class MetricAnalyzerJavascriptTest {
     @Test
     void testSarifReportGeneration() throws IOException {
         metricAnalyzer.runMetrics(codeAnalysisConfig);
-        File generatedFile = new File("src/main/resources/eslint_sarif.sarif");
-        assertTrue(generatedFile.exists(), "Generated ruleset file does not exist");
+        File initgeneratedFile = new File("src/main/resources/eslint_sarif.sarif");
+        assertTrue(initgeneratedFile.exists(), "Generated SARIF file does not exist");
+        SarifMerger.mergeSarif();
+        File generatedFile = new File("src/main/resources/Final.sarif");
+        assertTrue(generatedFile.exists(), "Generated SARIF file does not exist");
     }
     @Test
     void testReportCorrect() throws IOException {

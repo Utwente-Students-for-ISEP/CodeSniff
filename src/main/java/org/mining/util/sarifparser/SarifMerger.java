@@ -66,14 +66,14 @@ public class SarifMerger {
             List<String> sarifFiles = List.of("src/main/resources/jgit_sarif.sarif", "src/main/resources/java_sarif.sarif", "src/main/resources/eslint_sarif.sarif");
             String outputFile = "src/main/resources/Final.sarif";
             startSarifMerge(sarifFiles, outputFile);
-            /*
+
             for(String filepath : sarifFiles){
                 File file = new File(filepath);
                 if (file.exists() || file.isFile()) {
                     file.delete();
                 }
             }
-            */
+
         } catch (Exception e) {
             System.err.println("An unexpected error occurred: " + e.getMessage());
             e.printStackTrace();

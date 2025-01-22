@@ -45,7 +45,7 @@ public class MetricAnalyzerJavascriptTest {
     @Test
     void testSarifReportGeneration() throws IOException {
         metricAnalyzer.runMetrics(codeAnalysisConfig);
-        File generatedFile = new File("src/main/resources/Final.sarif");
+        File generatedFile = new File("src/main/resources/eslint_sarif.sarif");
         assertTrue(generatedFile.exists(), "Generated ruleset file does not exist");
     }
     @Test

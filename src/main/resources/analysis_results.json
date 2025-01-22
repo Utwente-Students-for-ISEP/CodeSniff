@@ -1,671 +1,189 @@
 {"metrics": [
     {
-        "metricName": "Commit Size",
-        "result": [
-            {"totalLinesAdded": 133},
-            {"totalLinesDeleted": 75}
-        ]
+        "metricName": "Branch Time",
+        "result": "No merged branches to calculate average branch time."
     },
     {
-        "metricName": "CommitFixRevert",
-        "result": []
+        "metricName": "Commit Frequency",
+        "result": [
+            {
+                "date": "2024-12-14",
+                "commits": 2
+            },
+            {
+                "date": "2024-12-15",
+                "commits": 2
+            },
+            {
+                "date": "2025-01-08",
+                "commits": 1
+            }
+        ]
     },
     {
         "metricName": "Code Ownership By File",
         "result": {"files": [
             {
-                "filePath": "spring-test/src/main/java/org/springframework/test/context/bean/override/mockito/AbstractMockitoBeanOverrideHandler.java",
+                "filePath": "Javatest.java",
                 "contributors": [{
-                    "author": "Sam Brannen",
-                    "percentage": 100,
-                    "changes": 2
-                }],
-                "topContributor": {
-                    "percentage": 100,
-                    "name": "Sam Brannen"
-                }
-            },
-            {
-                "filePath": "spring-test/src/main/java/org/springframework/test/context/bean/override/mockito/MockitoBeanOverrideHandler.java",
-                "contributors": [{
-                    "author": "Sam Brannen",
-                    "percentage": 100,
-                    "changes": 2
-                }],
-                "topContributor": {
-                    "percentage": 100,
-                    "name": "Sam Brannen"
-                }
-            },
-            {
-                "filePath": "spring-core/src/test/java/org/springframework/core/env/SimpleCommandLinePropertySourceTests.java",
-                "contributors": [{
-                    "author": "Sam Brannen",
-                    "percentage": 100,
-                    "changes": 2
-                }],
-                "topContributor": {
-                    "percentage": 100,
-                    "name": "Sam Brannen"
-                }
-            },
-            {
-                "filePath": "spring-test/src/main/java/org/springframework/test/context/bean/override/BeanOverrideHandler.java",
-                "contributors": [{
-                    "author": "Sam Brannen",
+                    "author": "Danila",
                     "percentage": 100,
                     "changes": 1
                 }],
                 "topContributor": {
                     "percentage": 100,
-                    "name": "Sam Brannen"
+                    "name": "Danila"
                 }
             },
             {
-                "filePath": "spring-core/src/main/java/org/springframework/core/env/SimpleCommandLineArgsParser.java",
-                "contributors": [
-                    {
-                        "author": "Sam Brannen",
-                        "percentage": 66.66666666666666,
-                        "changes": 2
-                    },
-                    {
-                        "author": "puppy4c",
-                        "percentage": 33.33333333333333,
-                        "changes": 1
-                    }
-                ],
-                "topContributor": {
-                    "percentage": 66.66666666666667,
-                    "name": "Sam Brannen"
-                }
-            },
-            {
-                "filePath": "spring-core/src/main/java/org/springframework/core/env/CommandLinePropertySource.java",
+                "filePath": "test.py",
                 "contributors": [{
-                    "author": "Sam Brannen",
+                    "author": "Danila",
                     "percentage": 100,
                     "changes": 2
                 }],
                 "topContributor": {
                     "percentage": 100,
-                    "name": "Sam Brannen"
+                    "name": "Danila"
                 }
             },
             {
-                "filePath": "spring-core/src/test/java/org/springframework/core/env/SimpleCommandLineArgsParserTests.java",
+                "filePath": "jstest.js",
                 "contributors": [{
-                    "author": "Sam Brannen",
+                    "author": "Danila",
                     "percentage": 100,
                     "changes": 2
                 }],
                 "topContributor": {
                     "percentage": 100,
-                    "name": "Sam Brannen"
-                }
-            },
-            {
-                "filePath": "spring-context/src/test/java/org/springframework/scheduling/concurrent/AbstractSchedulingTaskExecutorTests.java",
-                "contributors": [{
-                    "author": "Sam Brannen",
-                    "percentage": 100,
-                    "changes": 1
-                }],
-                "topContributor": {
-                    "percentage": 100,
-                    "name": "Sam Brannen"
-                }
-            },
-            {
-                "filePath": "spring-core/src/main/java/org/springframework/core/env/SimpleCommandLinePropertySource.java",
-                "contributors": [
-                    {
-                        "author": "Sam Brannen",
-                        "percentage": 66.66666666666666,
-                        "changes": 2
-                    },
-                    {
-                        "author": "puppy4c",
-                        "percentage": 33.33333333333333,
-                        "changes": 1
-                    }
-                ],
-                "topContributor": {
-                    "percentage": 66.66666666666667,
-                    "name": "Sam Brannen"
-                }
-            },
-            {
-                "filePath": "framework-platform/framework-platform.gradle",
-                "contributors": [{
-                    "author": "Sam Brannen",
-                    "percentage": 100,
-                    "changes": 2
-                }],
-                "topContributor": {
-                    "percentage": 100,
-                    "name": "Sam Brannen"
+                    "name": "Danila"
                 }
             }
         ]}
-    },
-    {
-        "metricName": "Branch Time",
-        "result": "Average Branch Lifetime: 0 days, 0 hours, 0 minutes"
-    },
-    {
-        "metricName": "Commit Frequency",
-        "result": [{
-            "date": "2025-01-18",
-            "commits": 10
-        }]
-    },
-    {
-        "metricName": "Branch Count with Authors",
-        "result": {
-            "totalBranchCount": 20,
-            "authors": [
-                {
-                    "author": "Spring Buildmaster",
-                    "branches": [
-                        {"branchName": "refs/remotes/origin/4.3.x"},
-                        {"branchName": "refs/remotes/origin/5.0.x"}
-                    ]
-                },
-                {
-                    "author": "Brian Clozel",
-                    "branches": [{"branchName": "refs/remotes/origin/6.1.x"}]
-                },
-                {
-                    "author": "Stéphane Nicoll",
-                    "branches": [{"branchName": "refs/remotes/origin/5.3.x"}]
-                },
-                {
-                    "author": "github-actions[bot]",
-                    "branches": [
-                        {"branchName": "refs/remotes/origin/6.0.x_update-antora-ui-spring"},
-                        {"branchName": "refs/remotes/origin/docs-build"}
-                    ]
-                },
-                {
-                    "author": "Spring Operator",
-                    "branches": [{"branchName": "refs/remotes/origin/gh-pages"}]
-                },
-                {
-                    "author": "Stephane Nicoll",
-                    "branches": [{"branchName": "refs/remotes/origin/5.1.x"}]
-                },
-                {
-                    "author": "Chris Beams",
-                    "branches": [{"branchName": "refs/remotes/origin/3.0.x"}]
-                },
-                {
-                    "author": "Sam Brannen",
-                    "branches": [
-                        {"branchName": "refs/heads/main"},
-                        {"branchName": "refs/remotes/origin/4.0.x"},
-                        {"branchName": "refs/remotes/origin/4.1.x"},
-                        {"branchName": "refs/remotes/origin/6.2.x"},
-                        {"branchName": "refs/remotes/origin/HEAD"},
-                        {"branchName": "refs/remotes/origin/main"}
-                    ]
-                },
-                {
-                    "author": "Rossen Stoyanchev",
-                    "branches": [{"branchName": "refs/remotes/origin/3.1.x"}]
-                },
-                {
-                    "author": "Spring Builds",
-                    "branches": [{"branchName": "refs/remotes/origin/5.2.x"}]
-                },
-                {
-                    "author": "Juergen Hoeller",
-                    "branches": [
-                        {"branchName": "refs/remotes/origin/3.2.x"},
-                        {"branchName": "refs/remotes/origin/4.2.x"}
-                    ]
-                },
-                {
-                    "author": "rstoyanchev",
-                    "branches": [{"branchName": "refs/remotes/origin/6.0.x"}]
-                }
-            ]
-        }
     },
     {
         "metricName": "Code Churn",
         "result": {"files": [
             {
-                "filePath": "BeanOverrideHandler.java",
+                "filePath": "test.py",
                 "methods": [
                     {
-                        "methodName": "void trackOverrideInstance(Object override, SingletonBeanRegistry singletonBeanRegistry)",
+                        "methodName": "get_task_count(self)",
+                        "modifications": 2
+                    },
+                    {
+                        "methodName": "main()",
+                        "modifications": 2
+                    },
+                    {
+                        "methodName": "__init__(self)",
+                        "modifications": 2
+                    },
+                    {
+                        "methodName": "remove_task(self, task, v)",
+                        "modifications": 2
+                    },
+                    {
+                        "methodName": "mark_doe(self, task)",
                         "modifications": 1
                     },
                     {
-                        "methodName": "Object createOverrideInstance(String beanName, BeanDefinition existingBeanDefinition, Object existingBeanInstance, SingletonBeanRegistry singletonBeanRegistry)",
-                        "modifications": 1
+                        "methodName": "show_tasks(self)",
+                        "modifications": 2
                     },
                     {
-                        "methodName": "int hashCode()",
-                        "modifications": 1
+                        "methodName": "add_task(self, task, v)",
+                        "modifications": 2
                     },
                     {
-                        "methodName": "void processClass(Class<?> clazz, Class<?> testClass, List<BeanOverrideHandler> handlers)",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "List<BeanOverrideHandler> forTestClass(Class<?> testClass)",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void findHandlers(Class<?> clazz, Class<?> testClass, List<BeanOverrideHandler> handlers, boolean localFieldsOnly)",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "Object createOverrideInstance(String beanName, BeanDefinition existingBeanDefinition, Object existingBeanInstance)",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "Field getField()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "BeanOverrideStrategy getStrategy()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "List<BeanOverrideHandler> findAllHandlers(Class<?> testClass)",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "boolean equals(Object other)",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void processElement(AnnotatedElement element, Class<?> testClass, BiConsumer<BeanOverrideProcessor,Annotation> consumer)",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "Set<Annotation> getQualifierAnnotations(Field field)",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "List<BeanOverrideHandler> findHandlers(Class<?> testClass, boolean localFieldsOnly)",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "ResolvableType getBeanType()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "boolean isBeanOverrideAnnotation(Class<?extendsAnnotation> type)",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void processField(Field field, Class<?> testClass, List<BeanOverrideHandler> handlers)",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "String getBeanName()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "String toString()",
+                        "methodName": "mark_done(self, task)",
                         "modifications": 1
                     }
                 ]
             },
             {
-                "filePath": "CommandLinePropertySource.java",
+                "filePath": "Javatest.java",
                 "methods": [
                     {
-                        "methodName": "boolean containsOption(String name)",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "String getProperty(String name)",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "List<String> getOptionValues(String name)",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "boolean containsProperty(String name)",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void setNonOptionArgsPropertyName(String nonOptionArgsPropertyName)",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "List<String> getNonOptionArgs()",
-                        "modifications": 2
-                    }
-                ]
-            },
-            {
-                "filePath": "SimpleCommandLineArgsParser.java",
-                "methods": [{
-                    "methodName": "CommandLineArgs parse()",
-                    "modifications": 3
-                }]
-            },
-            {
-                "filePath": "SimpleCommandLineArgsParserTests.java",
-                "methods": [
-                    {
-                        "methodName": "void supportsEndOfOptionsDelimiter()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void nonOptionArgsListIsUnmodifiable()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withMixOfOptionsHavingValueAndOptionsHavingNoValue()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withRepeatedOptionAndSameValues()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withSingleOptionAndNoValue()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withNoOptions()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withEmptyOptionNameAndEmptyOptionValue()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withEmptyOptionName()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withNonOptionArguments()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withSingleOptionAndValue()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void optionNamesSetIsUnmodifiable()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withRepeatedOptionAndDifferentValues()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withEmptyOptionValue()",
-                        "modifications": 2
-                    }
-                ]
-            },
-            {
-                "filePath": "SimpleCommandLinePropertySource.java",
-                "methods": [
-                    {
-                        "methodName": "boolean containsOption(String name)",
-                        "modifications": 3
-                    },
-                    {
-                        "methodName": "String[] getPropertyNames()",
-                        "modifications": 3
-                    },
-                    {
-                        "methodName": "List<String> getOptionValues(String name)",
-                        "modifications": 3
-                    },
-                    {
-                        "methodName": "List<String> getNonOptionArgs()",
-                        "modifications": 3
-                    }
-                ]
-            },
-            {
-                "filePath": "SimpleCommandLinePropertySourceTests.java",
-                "methods": [
-                    {
-                        "methodName": "void withCustomName()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void covertNonOptionArgsToStringArrayAndList()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withNoArgs()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withDefaultNonOptionArgsNameAndNoNonOptionArgsPresent()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withDefaultNonOptionArgsNameAndNonOptionArgsPresent()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withCustomNonOptionArgsNameAndNoNonOptionArgsPresent()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withRepeatedOptionArgs()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withOptionalArg_andArgIsEmpty()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withOptionArgsOnly()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void withDefaultName()",
-                        "modifications": 2
-                    }
-                ]
-            },
-            {
-                "filePath": "AbstractSchedulingTaskExecutorTests.java",
-                "methods": [
-                    {
-                        "methodName": "void executeFailingRunnable()",
+                        "methodName": "void setEmail(String email)",
                         "modifications": 1
                     },
                     {
-                        "methodName": "void submitCallableWithGetAfterShutdown()",
+                        "methodName": "void setName(String name)",
                         "modifications": 1
                     },
                     {
-                        "methodName": "void submitFailingListenableCallable()",
+                        "methodName": "String getName()",
                         "modifications": 1
                     },
                     {
-                        "methodName": "void setup(TestInfo testInfo)",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void submitFailingCompletableCallable()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void submitFailingCompletableRunnable()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void submitListenableCallableWithGetAfterShutdown()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void submitListenableRunnableWithGetAfterShutdown()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "org.springframework.core.task.AsyncListenableTaskExecutor buildExecutor()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void shutdownExecutor()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void submitFailingCallable()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void await(CountDownLatch latch)",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void submitCallable()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void submitCompletableRunnable()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "String call()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void submitCompletableCallableWithGetAfterShutdown()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void await(TestTask task)",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void submitCompletableRunnableWithGetAfterShutdown()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void submitListenableRunnable()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void assertThreadNamePrefix(TestTask task)",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void run()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void submitListenableCallable()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void submitFailingListenableRunnable()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void executeRunnable()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void submitRunnableWithGetAfterShutdown()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void submitCompletableCallable()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void submitFailingRunnable()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void submitRunnable()",
-                        "modifications": 1
-                    },
-                    {
-                        "methodName": "void storeOutcome(Object o, Throwable t)",
+                        "methodName": "String getEmail()",
                         "modifications": 1
                     }
                 ]
             },
             {
-                "filePath": "MockitoBeanOverrideHandler.java",
+                "filePath": "jstest.js",
                 "methods": [
                     {
-                        "methodName": "int hashCode()",
+                        "methodName": "showTasks()",
                         "modifications": 2
                     },
                     {
-                        "methodName": "Answers getAnswers()",
+                        "methodName": "arrow_function",
                         "modifications": 2
                     },
                     {
-                        "methodName": "boolean equals(Object other)",
+                        "methodName": "getTaskCount()",
                         "modifications": 2
                     },
                     {
-                        "methodName": "Set<Class<?>> asClassSet(Class<?>[] classes)",
+                        "methodName": "markDone(task)",
                         "modifications": 2
                     },
                     {
-                        "methodName": "Object createOverrideInstance(String beanName, BeanDefinition existingBeanDefinition, Object existingBeanInstance)",
+                        "methodName": "constructor()",
                         "modifications": 2
                     },
                     {
-                        "methodName": "Set<Class<?>> getExtraInterfaces()",
+                        "methodName": "addTask(task)",
                         "modifications": 2
                     },
                     {
-                        "methodName": "String toString()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "boolean isSerializable()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "T createMock(String name)",
-                        "modifications": 2
-                    }
-                ]
-            },
-            {
-                "filePath": "AbstractMockitoBeanOverrideHandler.java",
-                "methods": [
-                    {
-                        "methodName": "int hashCode()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "boolean equals(Object other)",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "MockBeans getMockBeans(SingletonBeanRegistry trackingBeanRegistry)",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "String toString()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "MockReset getReset()",
-                        "modifications": 2
-                    },
-                    {
-                        "methodName": "void trackOverrideInstance(Object mock, SingletonBeanRegistry trackingBeanRegistry)",
+                        "methodName": "removeTask(task)",
                         "modifications": 2
                     }
                 ]
             }
         ]}
+    },
+    {
+        "metricName": "Branch Count with Authors",
+        "result": {
+            "totalBranchCount": 2,
+            "authors": [{
+                "author": "Danila",
+                "branches": [
+                    {"branchName": "refs/heads/main"},
+                    {"branchName": "refs/remotes/origin/main"}
+                ]
+            }]
+        }
+    },
+    {
+        "metricName": "Commit Size",
+        "result": [
+            {"totalLinesAdded": 116},
+            {"totalLinesDeleted": 9}
+        ]
+    },
+    {
+        "metricName": "CommitFixRevert",
+        "result": [{
+            "date": "Wed Jan 08 12:12:30 CET 2025",
+            "author": "Danila",
+            "commitID": "4b1aff3ba9bee670164d6c202383b68823cb6b4b",
+            "message": "fix revert\n"
+        }]
     }
 ]}

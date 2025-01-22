@@ -13,12 +13,8 @@ module.exports = [
     rules: {
       'no-unused-vars': 'warn',
       'no-console': 'off',
-      'complexity': ['warn', 100],
       'import/no-cycle': 'warn',
-      'import/max-dependencies': ['warn', { max: 20 }],
-      'max-lines': ['warn', { 'max': 1000, 'skipComments': true }],
-      'max-lines-per-function': ['warn', { 'max': 50, 'skipComments': true, 'skipBlankLines': true }],
-      'max-params': ['warn', 4],
-      'custom-rules/depth-of-inheritance-tree': ['warn', 2],    },
+      'import/max-dependencies': ['warn', { max: 2 }],
+    },
   },
 ];

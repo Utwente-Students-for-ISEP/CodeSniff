@@ -46,9 +46,11 @@ public class MetricAnalyzerJavascriptTest {
     @Test
     void testSarifReportGeneration() throws IOException {
         metricAnalyzer.runMetrics(codeAnalysisConfig);
+        File initgeneratedFile = new File("src/main/resources/eslint_sarif.sarif");
+        assertTrue(initgeneratedFile.exists(), "Generated SARIF file does not exist");
         SarifMerger.mergeSarif();
         File generatedFile = new File("src/main/resources/Final.sarif");
-        assertTrue(generatedFile.exists(), "Generated ruleset file does not exist");
+        assertTrue(generatedFile.exists(), "Generated SARIF file does not exist");
     }
     @Test
     void testReportCorrect() throws IOException {
